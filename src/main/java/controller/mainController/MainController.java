@@ -4,6 +4,7 @@ import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
+import controller.muonSachController.MuonSachController;
 import javafx.animation.FillTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -47,9 +48,6 @@ public class MainController implements Initializable {
     private JFXButton btnThongKe;
 
     @FXML
-    private BorderPane borderPane;
-
-    @FXML
     private AnchorPane topPane;
 
     @FXML
@@ -60,6 +58,9 @@ public class MainController implements Initializable {
 
     @FXML
     private JFXHamburger btnAccount;
+
+    @FXML
+    private BorderPane tablePane;
 
     private ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
 
@@ -88,28 +89,29 @@ public class MainController implements Initializable {
         });
 
         mainPane.setRight(null);
+        tablePane.setCenter(new MuonSachController().getTable());
     }
 
     @FXML
     void handleToolBarClick(ActionEvent event) {
         Object target = event.getSource();
         if (target == btnMuonSach){
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
         } else if (target == btnTraSach) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.TraSach);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TraSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
         } else if (target == btnQuanLySach) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
         } else if (target == btnTheThuVien) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.TheThuVien);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TheThuVien);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
         } else if (target == btnBanDoc) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.BanDoc);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.BanDoc);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
         } else if (target == btnThongKe) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.ThongKe);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.ThongKe);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
         }
 
@@ -147,17 +149,17 @@ public class MainController implements Initializable {
         btn.setButtonType(JFXButton.ButtonType.RAISED);
 
         if (btn == btnMuonSach) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
         } else if (btn == btnTraSach) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
         } else if (btn == btnQuanLySach) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
         } else if (btn == btnTheThuVien) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
         } else if (btn == btnBanDoc) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
         } else if (btn == btnThongKe) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
         }
     }
 
