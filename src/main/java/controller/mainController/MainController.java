@@ -1,6 +1,9 @@
 package controller.mainController;
 
+import animatefx.animation.*;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 import javafx.animation.FillTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -16,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -48,6 +52,15 @@ public class MainController implements Initializable {
     @FXML
     private AnchorPane topPane;
 
+    @FXML
+    private BorderPane mainPane;
+
+    @FXML
+    private VBox accountPane;
+
+    @FXML
+    private JFXHamburger btnAccount;
+
     private ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
 
     private final Double speed = 0.5;
@@ -56,6 +69,25 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         SelectButton(btnMuonSach);
         selectedBtn.set(btnMuonSach);
+
+        HamburgerNextArrowBasicTransition burgerTask = new HamburgerNextArrowBasicTransition(btnAccount);
+        burgerTask.setRate(-1);
+        btnAccount.addEventHandler(MouseEvent.MOUSE_PRESSED, (e)->{
+            burgerTask.setRate(burgerTask.getRate()*-1);
+            burgerTask.play();
+            if (burgerTask.getRate() == 1){
+                mainPane.setRight(accountPane);
+                new SlideInRight(accountPane).play();
+            } else {
+                SlideOutRight slide = new SlideOutRight(accountPane);
+                slide.setOnFinished(event->{
+                    mainPane.setRight(null);
+                });
+                slide.play();
+            }
+        });
+
+        mainPane.setRight(null);
     }
 
     @FXML
