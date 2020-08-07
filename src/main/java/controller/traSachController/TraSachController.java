@@ -23,6 +23,7 @@ import modules.entities.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TraSachController {
@@ -72,7 +73,7 @@ public class TraSachController {
 
         colNgayTra.setCellValueFactory((param) -> {
             if (colNgayTra.validateValue(param)) {
-                return (ObservableValue<Date>) param.getValue().getValue().getNgayTra();
+                return param.getValue().getValue().ngayTra;
             } else return colNgayTra.getComputedValue(param);
         });
         CellFactory.getInstance().DateValueFactory(colNgayTra);

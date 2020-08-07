@@ -113,10 +113,11 @@ public class MuonSachController {
                         PhieuMuonDAO.getInstance().update(phieuMuon);
                         PhieuTra phieuTra = PhieuTraDAO.getInstance().getByID(phieuMuon.getId());
                         Calendar calendar = Calendar.getInstance();
-                        Date dateNgayTra = phieuTra.ngayTra.get();
+                        Date dateNgayTra = phieuTra.getNgayTra();
                         calendar.setTime(dateNgayTra);
-                        calendar.add(Calendar.DAY_OF_MONTH, phieuMuon.thoiHanMuon.get() + 7);
-                        phieuTra.ngayTra.set((java.sql.Date) calendar.getTime());
+                        calendar.add(Calendar.DAY_OF_MONTH, phieuMuon.thoiHanMuon.get() + 7 + phieuMuon.giaHan.get());
+                        java.sql.Date sqlDate = new java.sql.Date(calendar.getTime().getTime());
+                        phieuTra.setNgayTra(sqlDate);
                         PhieuTraDAO.getInstance().update(phieuTra);
                     });
                     AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n n\u00E0y trong 7 ng\u00E0y?");

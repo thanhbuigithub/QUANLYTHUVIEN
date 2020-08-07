@@ -120,6 +120,9 @@ public class MainController implements Initializable {
     void handleToolBarClick(ActionEvent event) {
         Object target = event.getSource();
         if (target == btnMuonSach) {
+            SelectButton(btnMuonSach);
+            UnSelectButton(btnTraSach);
+            selectedBtn.set(btnMuonSach);
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
             AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
