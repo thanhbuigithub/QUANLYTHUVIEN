@@ -1,4 +1,4 @@
-package modules;
+package modules.entities;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -127,5 +127,10 @@ public class Sach {
     @Override
     public int hashCode() {
         return Objects.hash(id, tenSach, namXuatBan, maNxb, maViTri, moTa, giaBia, soLuong, soTrang);
+    }
+
+    @Override
+    public String toString() {
+        return id + " - " + tenSach;
     }
 }

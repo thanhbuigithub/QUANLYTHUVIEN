@@ -12,8 +12,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private double xOffset = 0;
-    private double yOffset = 0;
+    public static Stage stage;
 
     public static void main(String[] args) {
         launch(args);
@@ -21,6 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("/view/main/main.fxml"));
         primaryStage.setTitle("M\u00E0n h\u00ECnh ch\u00EDnh");
         Scene scene = new Scene(root);

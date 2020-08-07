@@ -1,33 +1,38 @@
 package controller.mainController;
 
 import animatefx.animation.*;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
-import javafx.animation.FillTransition;
+import controller.Main;
+import controller.muonSachController.MuonSachController;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import modules.dao.*;
 
+import java.io.IOException;
 import java.net.URL;
+
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainController implements Initializable {
+    @FXML
+    private StackPane rootPane;
+
     @FXML
     private JFXButton btnMuonSach;
 
@@ -47,7 +52,7 @@ public class MainController implements Initializable {
     private JFXButton btnThongKe;
 
     @FXML
-    private BorderPane borderPane;
+    private JFXTextField tfSearch;
 
     @FXML
     private AnchorPane topPane;
@@ -60,6 +65,11 @@ public class MainController implements Initializable {
 
     @FXML
     private JFXHamburger btnAccount;
+
+    @FXML
+    private BorderPane tablePane;
+
+    private JFXButton taoPhieuMuon = new JFXButton("T\u1EA1o phi\u1EBFu m\u01B0\u1EE3n");
 
     private ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
 
@@ -88,28 +98,46 @@ public class MainController implements Initializable {
         });
 
         mainPane.setRight(null);
+        JFXTreeTableView table = new MuonSachController(rootPane, mainPane).getTable(tfSearch);
+        tablePane.setCenter(table);
+
+        taoPhieuMuon.setOnAction(e->{
+            try {
+                taoPhieuMuon();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        taoPhieuMuon.getStyleClass().add("add-button");
+
+        AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
+        AnchorPane.setTopAnchor(taoPhieuMuon, (double) 15);
+        topPane.getChildren().add(taoPhieuMuon);
     }
 
     @FXML
     void handleToolBarClick(ActionEvent event) {
         Object target = event.getSource();
         if (target == btnMuonSach){
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
+            AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
+            AnchorPane.setTopAnchor(taoPhieuMuon, (double) 15);
+            topPane.getChildren().add(taoPhieuMuon);
         } else if (target == btnTraSach) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.TraSach);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TraSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
         } else if (target == btnQuanLySach) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
         } else if (target == btnTheThuVien) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.TheThuVien);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TheThuVien);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
         } else if (target == btnBanDoc) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.BanDoc);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.BanDoc);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
         } else if (target == btnThongKe) {
-            borderPane.setStyle("-fx-border-color: " + MAINCOLOR.ThongKe);
+            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.ThongKe);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
         }
 
@@ -147,17 +175,17 @@ public class MainController implements Initializable {
         btn.setButtonType(JFXButton.ButtonType.RAISED);
 
         if (btn == btnMuonSach) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
         } else if (btn == btnTraSach) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
         } else if (btn == btnQuanLySach) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
         } else if (btn == btnTheThuVien) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
         } else if (btn == btnBanDoc) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
         } else if (btn == btnThongKe) {
-            ((JFXButton) btn).setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
         }
     }
 
@@ -172,5 +200,17 @@ public class MainController implements Initializable {
         btn.setStyle("-fx-background-color: " + MAINCOLOR.UnHoverBtn);
         btn.setButtonType(JFXButton.ButtonType.FLAT);
 
+    }
+
+    private void taoPhieuMuon() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/phieuMuon/themPhieuMuon.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("T\u1EA1o phi\u1EBFu m\u01B0\u1EE3n");
+        JFXDecorator decorator = new JFXDecorator(stage, loader.load());
+        Scene scene = new Scene(decorator, 560, 250);
+        stage.setScene(scene);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(Main.stage);
+        stage.showAndWait();
     }
 }

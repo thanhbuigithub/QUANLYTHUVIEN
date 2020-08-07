@@ -1,4 +1,6 @@
-package modules;
+package modules.entities;
+
+import modules.dao.BanDocDAO;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -66,5 +68,11 @@ public class TheThuVien {
     @Override
     public int hashCode() {
         return Objects.hash(id, idBanDoc, ngayTao, thoiHanSuDung);
+    }
+
+    @Override
+    public String toString() {
+        BanDoc banDoc = BanDocDAO.getInstance().getByID(idBanDoc);
+        return id + " - " + banDoc.getHoVaTen();
     }
 }

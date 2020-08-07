@@ -1,15 +1,13 @@
-package modules;
+package modules.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Nxb {
+@Table(name = "tac_gia", schema = "quanlythuvien", catalog = "")
+public class TacGia {
     private int id;
-    private String tenNxb;
+    private String tenTacGia;
     private String moTa;
 
     @Id
@@ -23,13 +21,13 @@ public class Nxb {
     }
 
     @Basic
-    @Column(name = "ten_nxb")
-    public String getTenNxb() {
-        return tenNxb;
+    @Column(name = "ten_tac_gia")
+    public String getTenTacGia() {
+        return tenTacGia;
     }
 
-    public void setTenNxb(String tenNxb) {
-        this.tenNxb = tenNxb;
+    public void setTenTacGia(String tenTacGia) {
+        this.tenTacGia = tenTacGia;
     }
 
     @Basic
@@ -46,14 +44,14 @@ public class Nxb {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Nxb nxb = (Nxb) o;
-        return id == nxb.id &&
-                Objects.equals(tenNxb, nxb.tenNxb) &&
-                Objects.equals(moTa, nxb.moTa);
+        TacGia tacGia = (TacGia) o;
+        return id == tacGia.id &&
+                Objects.equals(tenTacGia, tacGia.tenTacGia) &&
+                Objects.equals(moTa, tacGia.moTa);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tenNxb, moTa);
+        return Objects.hash(id, tenTacGia, moTa);
     }
 }

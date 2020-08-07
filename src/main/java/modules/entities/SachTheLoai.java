@@ -1,14 +1,14 @@
-package modules;
+package modules.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sach_tac_gia", schema = "quanlythuvien", catalog = "")
-@IdClass(SachTacGiaPK.class)
-public class SachTacGia {
+@Table(name = "sach_the_loai", schema = "quanlythuvien", catalog = "")
+@IdClass(SachTheLoaiPK.class)
+public class SachTheLoai {
     private int idSach;
-    private int idTacGia;
+    private int idTheLoai;
 
     @Id
     @Column(name = "id_sach")
@@ -21,26 +21,26 @@ public class SachTacGia {
     }
 
     @Id
-    @Column(name = "id_tac_gia")
-    public int getIdTacGia() {
-        return idTacGia;
+    @Column(name = "id_the_loai")
+    public int getIdTheLoai() {
+        return idTheLoai;
     }
 
-    public void setIdTacGia(int idTacGia) {
-        this.idTacGia = idTacGia;
+    public void setIdTheLoai(int idTheLoai) {
+        this.idTheLoai = idTheLoai;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SachTacGia that = (SachTacGia) o;
+        SachTheLoai that = (SachTheLoai) o;
         return idSach == that.idSach &&
-                idTacGia == that.idTacGia;
+                idTheLoai == that.idTheLoai;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idSach, idTacGia);
+        return Objects.hash(idSach, idTheLoai);
     }
 }
