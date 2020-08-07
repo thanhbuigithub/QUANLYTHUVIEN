@@ -1,13 +1,13 @@
--- MariaDB dump 10.17  Distrib 10.4.13-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlythuvien
 -- ------------------------------------------------------
--- Server version	10.4.13-MariaDB
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,15 +21,15 @@
 
 DROP TABLE IF EXISTS `sach_ngon_ngu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sach_ngon_ngu` (
-  `id_sach` int(11) NOT NULL,
-  `id_ngon_ngu` int(11) NOT NULL,
+  `id_sach` int NOT NULL,
+  `id_ngon_ngu` int NOT NULL,
   PRIMARY KEY (`id_sach`,`id_ngon_ngu`),
   KEY `fk_id_ngon_ngu_sach_ngon_ngu_idx` (`id_ngon_ngu`),
   CONSTRAINT `fk_id_ngon_ngu_sach_ngon_ngu` FOREIGN KEY (`id_ngon_ngu`) REFERENCES `ngon_ngu` (`id`),
   CONSTRAINT `fk_id_sach_sach_ngon_ngu` FOREIGN KEY (`id_sach`) REFERENCES `sach` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `sach_ngon_ngu` (
 
 LOCK TABLES `sach_ngon_ngu` WRITE;
 /*!40000 ALTER TABLE `sach_ngon_ngu` DISABLE KEYS */;
-INSERT INTO `sach_ngon_ngu` VALUES (2,1),(3,2),(4,3),(5,4),(6,5);
+INSERT INTO `sach_ngon_ngu` VALUES (4,1),(3,2),(5,3),(2,4),(1,5);
 /*!40000 ALTER TABLE `sach_ngon_ngu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-05 18:40:25
+-- Dump completed on 2020-08-06  9:17:50
