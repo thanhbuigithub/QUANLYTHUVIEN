@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.muonSachController.themPhieuMuon.themPhieuMuonController">
+   <children>
+      <Label contentDisplay="TOP" layoutX="51.0" layoutY="33.0" text="Sách" textFill="#656565">
+         <font>
+            <Font name="Montserrat Medium" size="18.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbxSach" editable="true" layoutX="188.0" layoutY="27.0" prefHeight="31.0" prefWidth="321.0" />
+      <Label contentDisplay="TOP" layoutX="51.0" layoutY="91.0" text="Thẻ thư viện" textFill="#656565">
+         <font>
+            <Font name="Montserrat Medium" size="18.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbxTheThuVien" editable="true" layoutX="188.0" layoutY="85.0" prefHeight="31.0" prefWidth="321.0" />
+      <JFXButton fx:id="btnTaoPhieuMuon" layoutX="201.0" layoutY="160.0" text="Tạo Phiếu Mượn">
+         <font>
+            <Font name="Montserrat Medium" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

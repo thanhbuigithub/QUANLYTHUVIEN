@@ -1,16 +1,17 @@
-package modules;
+package modules.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Objects;
 
-public class SachNgonNguPK implements Serializable {
+@Entity
+@Table(name = "sach_ngon_ngu", schema = "quanlythuvien", catalog = "")
+@IdClass(SachNgonNguPK.class)
+public class SachNgonNgu {
     private int idSach;
     private int idNgonNgu;
 
-    @Column(name = "id_sach")
     @Id
+    @Column(name = "id_sach")
     public int getIdSach() {
         return idSach;
     }
@@ -19,8 +20,8 @@ public class SachNgonNguPK implements Serializable {
         this.idSach = idSach;
     }
 
-    @Column(name = "id_ngon_ngu")
     @Id
+    @Column(name = "id_ngon_ngu")
     public int getIdNgonNgu() {
         return idNgonNgu;
     }
@@ -33,7 +34,7 @@ public class SachNgonNguPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SachNgonNguPK that = (SachNgonNguPK) o;
+        SachNgonNgu that = (SachNgonNgu) o;
         return idSach == that.idSach &&
                 idNgonNgu == that.idNgonNgu;
     }

@@ -1,34 +1,38 @@
 package controller.mainController;
 
 import animatefx.animation.*;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
+import controller.Main;
 import controller.muonSachController.MuonSachController;
-import javafx.animation.FillTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
-import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import modules.dao.*;
 
+import java.io.IOException;
 import java.net.URL;
+
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainController implements Initializable {
+    @FXML
+    private StackPane rootPane;
+
     @FXML
     private JFXButton btnMuonSach;
 
@@ -48,6 +52,9 @@ public class MainController implements Initializable {
     private JFXButton btnThongKe;
 
     @FXML
+    private JFXTextField tfSearch;
+
+    @FXML
     private AnchorPane topPane;
 
     @FXML
@@ -61,6 +68,8 @@ public class MainController implements Initializable {
 
     @FXML
     private BorderPane tablePane;
+
+    private JFXButton taoPhieuMuon = new JFXButton("T\u1EA1o phi\u1EBFu m\u01B0\u1EE3n");
 
     private ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
 
@@ -89,7 +98,21 @@ public class MainController implements Initializable {
         });
 
         mainPane.setRight(null);
-        tablePane.setCenter(new MuonSachController().getTable());
+        JFXTreeTableView table = new MuonSachController(rootPane, mainPane).getTable(tfSearch);
+        tablePane.setCenter(table);
+
+        taoPhieuMuon.setOnAction(e->{
+            try {
+                taoPhieuMuon();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        taoPhieuMuon.getStyleClass().add("add-button");
+
+        AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
+        AnchorPane.setTopAnchor(taoPhieuMuon, (double) 15);
+        topPane.getChildren().add(taoPhieuMuon);
     }
 
     @FXML
@@ -98,6 +121,9 @@ public class MainController implements Initializable {
         if (target == btnMuonSach){
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
+            AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
+            AnchorPane.setTopAnchor(taoPhieuMuon, (double) 15);
+            topPane.getChildren().add(taoPhieuMuon);
         } else if (target == btnTraSach) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TraSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
@@ -174,5 +200,17 @@ public class MainController implements Initializable {
         btn.setStyle("-fx-background-color: " + MAINCOLOR.UnHoverBtn);
         btn.setButtonType(JFXButton.ButtonType.FLAT);
 
+    }
+
+    private void taoPhieuMuon() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/phieuMuon/themPhieuMuon.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("T\u1EA1o phi\u1EBFu m\u01B0\u1EE3n");
+        JFXDecorator decorator = new JFXDecorator(stage, loader.load());
+        Scene scene = new Scene(decorator, 560, 250);
+        stage.setScene(scene);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(Main.stage);
+        stage.showAndWait();
     }
 }

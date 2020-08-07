@@ -1,4 +1,4 @@
-package modules;
+package modules.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
