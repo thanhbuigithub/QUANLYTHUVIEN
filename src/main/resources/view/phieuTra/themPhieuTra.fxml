@@ -24,7 +24,7 @@
         </Label>
         <JFXComboBox fx:id="cbxTheThuVien" editable="true" layoutX="188.0" layoutY="85.0" prefHeight="31.0"
                      prefWidth="321.0"/>
-        <JFXButton fx:id="btnTaoPhieuTra" layoutX="235.0" layoutY="180.0" prefHeight="39.0" prefWidth="177.0"
+        <JFXButton fx:id="btnTaoPhieuTra" layoutX="260.0" layoutY="142.0" prefHeight="39.0" prefWidth="177.0"
                    text="Tạo Phiếu Trả">
             <font>
                 <Font name="Montserrat Medium" size="18.0"/>
