@@ -8,6 +8,8 @@ import java.util.List;
 public class Data {
     public static List<PhieuMuon> listPhieuMuon = PhieuMuonDAO.getInstance().getAll();
 
+    public static List<PhieuTra> listPhieuTra = PhieuTraDAO.getInstance().getAll();
+
     public static List<Sach> listSach = SachDAO.getInstance().getAll();
 
     public static List<TheThuVien> listTheThuVien = TheThuVienDAO.getInstance().getAll();

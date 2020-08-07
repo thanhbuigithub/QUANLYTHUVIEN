@@ -5,6 +5,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 import controller.Main;
 import controller.muonSachController.MuonSachController;
+import controller.traSachController.TraSachController;
 import javafx.animation.ScaleTransition;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -82,15 +83,15 @@ public class MainController implements Initializable {
 
         HamburgerNextArrowBasicTransition burgerTask = new HamburgerNextArrowBasicTransition(btnAccount);
         burgerTask.setRate(-1);
-        btnAccount.addEventHandler(MouseEvent.MOUSE_PRESSED, (e)->{
-            burgerTask.setRate(burgerTask.getRate()*-1);
+        btnAccount.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            burgerTask.setRate(burgerTask.getRate() * -1);
             burgerTask.play();
-            if (burgerTask.getRate() == 1){
+            if (burgerTask.getRate() == 1) {
                 mainPane.setRight(accountPane);
                 new SlideInRight(accountPane).play();
             } else {
                 SlideOutRight slide = new SlideOutRight(accountPane);
-                slide.setOnFinished(event->{
+                slide.setOnFinished(event -> {
                     mainPane.setRight(null);
                 });
                 slide.play();
@@ -101,7 +102,7 @@ public class MainController implements Initializable {
         JFXTreeTableView table = new MuonSachController(rootPane, mainPane).getTable(tfSearch);
         tablePane.setCenter(table);
 
-        taoPhieuMuon.setOnAction(e->{
+        taoPhieuMuon.setOnAction(e -> {
             try {
                 taoPhieuMuon();
             } catch (IOException ioException) {
@@ -118,15 +119,22 @@ public class MainController implements Initializable {
     @FXML
     void handleToolBarClick(ActionEvent event) {
         Object target = event.getSource();
-        if (target == btnMuonSach){
+        if (target == btnMuonSach) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
             AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
             AnchorPane.setTopAnchor(taoPhieuMuon, (double) 15);
             topPane.getChildren().add(taoPhieuMuon);
         } else if (target == btnTraSach) {
+            tablePane.setCenter(null);
+            taoPhieuMuon.setVisible(false);
+            UnSelectButton(btnMuonSach);
+            SelectButton(btnTraSach);
+            selectedBtn.set(btnTraSach);
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TraSach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
+            JFXTreeTableView table = new TraSachController(rootPane, mainPane).getTable(tfSearch);
+            tablePane.setCenter(table);
         } else if (target == btnQuanLySach) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
@@ -141,7 +149,7 @@ public class MainController implements Initializable {
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
         }
 
-        if (selectedBtn.get() != target){
+        if (selectedBtn.get() != target) {
             UnSelectButton(selectedBtn.get());
             selectedBtn.set((JFXButton) target);
         }
@@ -164,7 +172,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private void SelectButton(JFXButton btn){
+    private void SelectButton(JFXButton btn) {
         ScaleTransition scale = new ScaleTransition(Duration.seconds(speed), btn);
         scale.setToX(1.3f);
         scale.setToY(1.3f);
@@ -189,7 +197,7 @@ public class MainController implements Initializable {
         }
     }
 
-    private void UnSelectButton(JFXButton btn){
+    private void UnSelectButton(JFXButton btn) {
         ScaleTransition transition = new ScaleTransition(Duration.seconds(speed), btn);
         transition.setToX(1f);
         transition.setToY(1f);

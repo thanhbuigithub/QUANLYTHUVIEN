@@ -1,57 +1,59 @@
-package controller.muonSachController;
+package controller.traSachController;
 
 import com.jfoenix.controls.*;
+
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.jfoenix.controls.events.JFXDialogEvent;
 import controller.CellFactory;
 import controller.VNCharacterUtils;
 import controller.util.AlertMaker;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import modules.dao.*;
 import modules.entities.*;
 
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
-public class MuonSachController {
-    private JFXTreeTableView<PhieuMuon> table = new JFXTreeTableView<>();
+public class TraSachController {
+    private JFXTreeTableView<PhieuTra> table = new JFXTreeTableView<>();
+    private JFXTreeTableColumn<PhieuTra, String> colSach = new JFXTreeTableColumn<>("S\u00E1ch");
+    private JFXTreeTableColumn<PhieuTra, String> colBanDoc = new JFXTreeTableColumn<>("B\u1EA1n \u0110\u1ECDc");
+    private JFXTreeTableColumn<PhieuTra, Date> colNgayMuon = new JFXTreeTableColumn<>("Ng\u00E0y M\u01B0\u1EE3n");
+    private JFXTreeTableColumn<PhieuTra, Date> colNgayTra = new JFXTreeTableColumn<>("Ng\u00E0y Tr\u1EA3");
+    private JFXTreeTableColumn<PhieuTra, String> colTinhTrang = new JFXTreeTableColumn<>("T\u00ECnh Tr\u1EA1ng");
+    private JFXTreeTableColumn<PhieuTra, String> colBoiThuong = new JFXTreeTableColumn<>("B\u1ED3i th\u01B0\u1EDDng");
+    private JFXTreeTableColumn<PhieuTra, String> colNhanVien = new JFXTreeTableColumn<>("Nh\u00E2n Vi\u00EAn");
 
-    private JFXTreeTableColumn<PhieuMuon, String> colSach = new JFXTreeTableColumn<>("S\u00E1ch");
-    private JFXTreeTableColumn<PhieuMuon, String> colBanDoc = new JFXTreeTableColumn<>("B\u1EA1n \u0110\u1ECDc");
-    private JFXTreeTableColumn<PhieuMuon, Date> colNgayMuon = new JFXTreeTableColumn<>("Ng\u00E0y M\u01B0\u1EE3n");
-    private JFXTreeTableColumn<PhieuMuon, Integer> colThoiHanMuon = new JFXTreeTableColumn<>("Th\u1EDDi H\u1EA1n M\u01B0\u1EE3n");
-    private JFXTreeTableColumn<PhieuMuon, Integer> colGiaHan = new JFXTreeTableColumn<>("Gia H\u1EA1n");
-    private JFXTreeTableColumn<PhieuMuon, String> colNhanVien = new JFXTreeTableColumn<>("Nh\u00E2n Vi\u00EAn");
+    ObservableList<PhieuTra> pts = FXCollections.observableArrayList();
 
-    ObservableList<PhieuMuon> pms = FXCollections.observableArrayList();
-
-    public MuonSachController(StackPane rootPane, BorderPane mainPane) {
-        System.out.println(PhieuMuonDAO.getInstance().all());
-        pms.addAll(PhieuMuonDAO.getInstance().all());
+    public TraSachController(StackPane rootPane, BorderPane mainPane) {
+        pts.addAll(PhieuTraDAO.getInstance().all());
 
         colSach.setCellValueFactory((param) -> {
             if (colSach.validateValue(param)) {
-                PhieuMuon phieuMuon = param.getValue().getValue();
+                PhieuTra phieuTra = param.getValue().getValue();
+                PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
                 Sach sach = SachDAO.getInstance().getByID(phieuMuon.getIdSach());
                 return new SimpleStringProperty(phieuMuon.getIdSach() + " - " + sach.getTenSach());
             } else return colSach.getComputedValue(param);
         });
-
         CellFactory.getInstance().StringValueFactory(colSach);
 
         colBanDoc.setCellValueFactory((param) -> {
             if (colBanDoc.validateValue(param)) {
-                PhieuMuon phieuMuon = param.getValue().getValue();
+                PhieuTra phieuTra = param.getValue().getValue();
+                PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
                 TheThuVien theThuVien = TheThuVienDAO.getInstance().getByID(phieuMuon.getIdTheThuVien());
                 BanDoc banDoc = BanDocDAO.getInstance().getByID(theThuVien.getIdBanDoc());
                 return new SimpleStringProperty(theThuVien.getIdBanDoc() + " - " + banDoc.getHoVaTen());
@@ -61,77 +63,68 @@ public class MuonSachController {
 
         colNgayMuon.setCellValueFactory((param) -> {
             if (colNgayMuon.validateValue(param)) {
-                return param.getValue().getValue().ngayMuon;
+                PhieuTra phieuTra = param.getValue().getValue();
+                PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
+                return phieuMuon.ngayMuon;
             } else return colNgayMuon.getComputedValue(param);
         });
         CellFactory.getInstance().DateValueFactory(colNgayMuon);
 
-        colThoiHanMuon.setCellValueFactory((param) -> {
-            if (colThoiHanMuon.validateValue(param)) {
-                return param.getValue().getValue().thoiHanMuon;
-            } else return colThoiHanMuon.getComputedValue(param);
+        colNgayTra.setCellValueFactory((param) -> {
+            if (colNgayTra.validateValue(param)) {
+                return (ObservableValue<Date>) param.getValue().getValue().getNgayTra();
+            } else return colNgayTra.getComputedValue(param);
         });
+        CellFactory.getInstance().DateValueFactory(colNgayTra);
 
-        colGiaHan.setCellValueFactory((param) -> {
-            if (colThoiHanMuon.validateValue(param)) {
-                return param.getValue().getValue().giaHan;
-            } else return colThoiHanMuon.getComputedValue(param);
+        colTinhTrang.setCellValueFactory((param) -> {
+            if (colTinhTrang.validateValue(param)) {
+                return param.getValue().getValue().tinhTrang;
+            } else return colTinhTrang.getComputedValue(param);
         });
+        CellFactory.getInstance().StringValueFactory(colTinhTrang);
+
+        colBoiThuong.setCellValueFactory((param) -> {
+            if (colBoiThuong.validateValue(param)) {
+                return param.getValue().getValue().boiThuong;
+            } else return colBoiThuong.getComputedValue(param);
+        });
+        CellFactory.getInstance().StringValueFactory(colBoiThuong);
 
         colNhanVien.setCellValueFactory((param) -> {
             if (colNhanVien.validateValue(param)) {
-                PhieuMuon phieuMuon = param.getValue().getValue();
+                PhieuTra phieuTra = param.getValue().getValue();
+                PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
                 NhanVien nhanVien = NhanVienDAO.getInstance().getByID(phieuMuon.getIdNhanVien());
                 return new SimpleStringProperty(phieuMuon.getIdNhanVien() + " - " + nhanVien.getHoVaTen());
 
             } else return colNhanVien.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colNhanVien);
-
-        final TreeItem<PhieuMuon> root = new RecursiveTreeItem<>(pms, RecursiveTreeObject::getChildren);
+        final TreeItem<PhieuTra> root = new RecursiveTreeItem<>(pts, RecursiveTreeObject::getChildren);
 
         table.setRoot(root);
         table.setShowRoot(false);
         table.setEditable(true);
-
-        table.getColumns().setAll(colSach, colBanDoc, colNgayMuon, colThoiHanMuon, colGiaHan, colNhanVien);
+        table.getColumns().setAll(colSach, colBanDoc, colNgayMuon, colNgayTra, colTinhTrang, colBoiThuong, colNhanVien);
         table.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
 
         table.setRowFactory(value -> new JFXTreeTableRow<>() {
             {
                 ContextMenu addMenu = new ContextMenu();
-                MenuItem itemGiaHan = new MenuItem("Gia h\u1EA1n");
                 MenuItem itemXoa = new MenuItem("Xo\u00E1");
-                addMenu.getItems().addAll(itemGiaHan, itemXoa);
-                itemGiaHan.setOnAction((e) -> {
-                    JFXButton btnYES = new JFXButton("YES");
-                    JFXButton btnNO = new JFXButton("NO");
-                    btnYES.setOnAction(event -> {
-                        PhieuMuon phieuMuon = getTreeTableView().getTreeItem(getIndex()).getValue();
-                        phieuMuon.giaHan.set(phieuMuon.giaHan.get() + 1);
-                        phieuMuon.thoiHanMuon.set(phieuMuon.thoiHanMuon.get() + 7);
-                        PhieuMuonDAO.getInstance().update(phieuMuon);
-                        PhieuTra phieuTra = PhieuTraDAO.getInstance().getByID(phieuMuon.getId());
-                        Calendar calendar = Calendar.getInstance();
-                        Date dateNgayTra = phieuTra.ngayTra.get();
-                        calendar.setTime(dateNgayTra);
-                        calendar.add(Calendar.DAY_OF_MONTH, phieuMuon.thoiHanMuon.get() + 7);
-                        phieuTra.ngayTra.set((java.sql.Date) calendar.getTime());
-                        PhieuTraDAO.getInstance().update(phieuTra);
-                    });
-                    AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n n\u00E0y trong 7 ng\u00E0y?");
-                });
+                addMenu.getItems().add(itemXoa);
                 itemXoa.setOnAction((e) -> {
                     ObjectProperty<JFXDialog> dialogProperty = new SimpleObjectProperty<>();
                     JFXButton btnYES = new JFXButton("YES");
                     JFXButton btnNO = new JFXButton("NO");
                     btnYES.setOnAction(event -> {
-                        PhieuMuon phieuMuon = getTreeTableView().getTreeItem(getIndex()).getValue();
-                        if (PhieuMuonDAO.getInstance().remove(phieuMuon)) {
+                        PhieuTra phieuTra = getTreeTableView().getTreeItem(getIndex()).getValue();
+                        if (PhieuMuonDAO.getInstance().remove(phieuTra)) {
                             getTreeTableView().getRoot().getChildren().remove(getIndex());
                         }
                     });
-                    AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Xo\u00E1 phi\u1EBFu m\u01B0\u1EE3n", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n xo\u00E1 phi\u1EBFu m\u01B0\u1EE3n n\u00E0y?");
+                    AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Xo\u00E1 phi\u1EBFu tr\u1EA3", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n xo\u00E1 phi\u1EBFu tr\u1EA3 n\u00E0y?");
                 });
                 this.setContextMenu(addMenu);
             }
@@ -142,7 +135,8 @@ public class MuonSachController {
         tfSearch.textProperty().addListener((o, oldVal, newVal) -> {
             String newValueNoAccent = VNCharacterUtils.removeAccent(newVal);
             table.setPredicate(pmProperty -> {
-                PhieuMuon pm = pmProperty.getValue();
+                PhieuTra pt = pmProperty.getValue();
+                PhieuMuon pm = PhieuMuonDAO.getInstance().getByID(pt.idPhieuMuon.get());
                 Sach sach = SachDAO.getInstance().getByID(pm.getIdSach());
                 TheThuVien theThuVien = TheThuVienDAO.getInstance().getByID(pm.getIdTheThuVien());
                 BanDoc banDoc = BanDocDAO.getInstance().getByID(theThuVien.getIdBanDoc());
