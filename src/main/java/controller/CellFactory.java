@@ -54,4 +54,22 @@ public class CellFactory {
             return cell ;
         });
     }
+
+    public void StringCenterValueFactory(JFXTreeTableColumn col){
+        col.setCellFactory(tc -> {
+            JFXTreeTableCell<?, ?> cell = new JFXTreeTableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            text.wrappingWidthProperty().bind(col.widthProperty().multiply(0.9));
+            text.textProperty().bind(Bindings.createStringBinding(() -> {
+                if (cell.isEmpty()) {
+                    return null ;
+                } else {
+                    return String.valueOf(cell.getItem());
+                }
+            }, cell.emptyProperty(), cell.itemProperty()));
+            text.getStyleClass().add("text-center");
+            return cell ;
+        });
+    }
 }

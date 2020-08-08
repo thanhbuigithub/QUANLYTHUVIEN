@@ -74,7 +74,7 @@ public abstract class AbstractDAO<T> implements Serializable{
         return null;
     }
 
-    public <T> List<T> getById(Integer id) {
+    private  <T> List<T> getById(Integer id) {
         try {
             session = GlobalDataSession.getSession();
             session.getTransaction().begin();

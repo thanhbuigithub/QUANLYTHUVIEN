@@ -1,5 +1,10 @@
 package modules.entities;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,16 +12,16 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Sach {
+public class Sach extends RecursiveTreeObject<Sach> {
     private int id;
-    private String tenSach;
-    private int namXuatBan;
-    private int maNxb;
-    private Integer maViTri;
-    private String moTa;
-    private Integer giaBia;
-    private Integer soLuong;
-    private int soTrang;
+    public SimpleStringProperty tenSach = new SimpleStringProperty();
+    public ObjectProperty<Integer> namXuatBan = new SimpleObjectProperty<>();
+    public ObjectProperty<Integer> maNxb = new SimpleObjectProperty<>();
+    public ObjectProperty<Integer> maViTri = new SimpleObjectProperty<>();
+    public SimpleStringProperty moTa = new SimpleStringProperty();
+    public ObjectProperty<Integer> giaBia = new SimpleObjectProperty<>();
+    public ObjectProperty<Integer> soLuong = new SimpleObjectProperty<>();
+    public ObjectProperty<Integer> soTrang = new SimpleObjectProperty<>();
 
     @Id
     @Column(name = "id")
@@ -31,81 +36,81 @@ public class Sach {
     @Basic
     @Column(name = "ten_sach")
     public String getTenSach() {
-        return tenSach;
+        return tenSach.get();
     }
 
     public void setTenSach(String tenSach) {
-        this.tenSach = tenSach;
+        this.tenSach.set(tenSach);
     }
 
     @Basic
     @Column(name = "nam_xuat_ban")
-    public int getNamXuatBan() {
-        return namXuatBan;
+    public Integer getNamXuatBan() {
+        return namXuatBan.get();
     }
 
-    public void setNamXuatBan(int namXuatBan) {
-        this.namXuatBan = namXuatBan;
+    public void setNamXuatBan(Integer namXuatBan) {
+        this.namXuatBan.set(namXuatBan);
     }
 
     @Basic
     @Column(name = "ma_nxb")
-    public int getMaNxb() {
-        return maNxb;
+    public Integer getMaNxb() {
+        return maNxb.get();
     }
 
-    public void setMaNxb(int maNxb) {
-        this.maNxb = maNxb;
+    public void setMaNxb(Integer maNxb) {
+        this.maNxb.set(maNxb);
     }
 
     @Basic
     @Column(name = "ma_vi_tri")
     public Integer getMaViTri() {
-        return maViTri;
+        return maViTri.get();
     }
 
     public void setMaViTri(Integer maViTri) {
-        this.maViTri = maViTri;
+        this.maViTri.set(maViTri);
     }
 
     @Basic
     @Column(name = "mo_ta")
     public String getMoTa() {
-        return moTa;
+        return moTa.get();
     }
 
     public void setMoTa(String moTa) {
-        this.moTa = moTa;
+        this.moTa.set(moTa);
     }
 
     @Basic
     @Column(name = "gia_bia")
     public Integer getGiaBia() {
-        return giaBia;
+        return giaBia.get();
     }
 
     public void setGiaBia(Integer giaBia) {
-        this.giaBia = giaBia;
+        this.giaBia.set(giaBia);
     }
 
     @Basic
     @Column(name = "so_luong")
     public Integer getSoLuong() {
-        return soLuong;
+        return soLuong.get();
     }
 
     public void setSoLuong(Integer soLuong) {
-        this.soLuong = soLuong;
+        this.soLuong.set(soLuong);
     }
 
     @Basic
     @Column(name = "so_trang")
-    public int getSoTrang() {
-        return soTrang;
+    public Integer getSoTrang() {
+        return soTrang.get();
     }
 
-    public void setSoTrang(int soTrang) {
-        this.soTrang = soTrang;
+    public void setSoTrang(Integer soTrang) {
+        this.soTrang.set(soTrang);
     }
 
     @Override

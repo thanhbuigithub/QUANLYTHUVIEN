@@ -5,6 +5,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 import controller.Main;
 import controller.muonSachController.MuonSachController;
+import controller.quanLySachController.QuanLySachController;
 import controller.traSachController.TraSachController;
 import javafx.animation.ScaleTransition;
 import javafx.beans.property.ObjectProperty;
@@ -74,6 +75,8 @@ public class MainController implements Initializable {
 
     private JFXButton taoPhieuTra = new JFXButton("T\u1EA1o phi\u1EBFu tr\u1EA3");
 
+    private JFXButton taoSach = new JFXButton("T\u1EA1o s\u00E1ch");
+
     private final ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
     private final ObjectProperty<JFXButton> btnCreateSelected = new SimpleObjectProperty<>();
 
@@ -81,6 +84,7 @@ public class MainController implements Initializable {
 
     MuonSachController muonSachController;
     TraSachController traSachController;
+    QuanLySachController quanLySachController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -117,6 +121,7 @@ public class MainController implements Initializable {
 
         muonSachController = new MuonSachController(rootPane, mainPane);
         traSachController = new TraSachController(rootPane, mainPane);
+        quanLySachController = new QuanLySachController(rootPane,mainPane);
 
         tablePane.setCenter(muonSachController.getTable(tfSearch));
 
@@ -143,6 +148,10 @@ public class MainController implements Initializable {
         taoPhieuTra.getStyleClass().add("add-button");
         AnchorPane.setRightAnchor(taoPhieuTra, (double) 10);
         AnchorPane.setTopAnchor(taoPhieuTra, (double) 15);
+
+        taoSach.getStyleClass().add("add-button");
+        AnchorPane.setRightAnchor(taoSach, (double) 10);
+        AnchorPane.setTopAnchor(taoSach, (double) 15);
     }
 
     @FXML
@@ -153,8 +162,7 @@ public class MainController implements Initializable {
         } else if (target == btnTraSach) {
             switchFunction(MAINCOLOR.TraSach, traSachController.getTable(tfSearch),taoPhieuTra);
         } else if (target == btnQuanLySach) {
-            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
-            topPane.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
+            switchFunction(MAINCOLOR.QuanLySach, quanLySachController.getTable(tfSearch),taoSach);
         } else if (target == btnTheThuVien) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TheThuVien);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
