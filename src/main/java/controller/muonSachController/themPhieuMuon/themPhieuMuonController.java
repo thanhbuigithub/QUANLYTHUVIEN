@@ -3,16 +3,14 @@ package controller.muonSachController.themPhieuMuon;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import controller.AutoCompleteComboBoxListener;
-import controller.Data;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.util.StringConverter;
+import modules.dao.BanDocDAO;
 import modules.dao.SachDAO;
-import modules.dao.TheThuVienDAO;
+import modules.entities.BanDoc;
 import modules.entities.Sach;
-import modules.entities.TheThuVien;
 
 import java.net.URL;
 import java.util.List;
@@ -24,7 +22,7 @@ public class themPhieuMuonController implements Initializable {
     private JFXComboBox<Sach> cbxSach;
 
     @FXML
-    private JFXComboBox<TheThuVien> cbxTheThuVien;
+    private JFXComboBox<BanDoc> cbxBanDoc;
 
     @FXML
     private JFXButton btnTaoPhieuMuon;
@@ -46,23 +44,23 @@ public class themPhieuMuonController implements Initializable {
             }
         });
 
-        List<TheThuVien> listTheThuVien = TheThuVienDAO.getInstance().all();
-        cbxTheThuVien.setItems(FXCollections.observableArrayList(listTheThuVien));
-        cbxTheThuVien.setConverter(new StringConverter<>() {
+        List<BanDoc> listBanDoc = BanDocDAO.getInstance().all();
+        cbxBanDoc.setItems(FXCollections.observableArrayList(listBanDoc));
+        cbxBanDoc.setConverter(new StringConverter<>() {
             @Override
-            public String toString(TheThuVien object) {
+            public String toString(BanDoc object) {
                 if (object == null) return null;
                 return object.toString();
             }
 
             @Override
-            public TheThuVien fromString(String string) {
-                return listTheThuVien.stream().filter(dd -> dd.toString().equals(string)).findAny().orElse(null);
+            public BanDoc fromString(String string) {
+                return listBanDoc.stream().filter(dd -> dd.toString().equals(string)).findAny().orElse(null);
             }
         });
 
         new AutoCompleteComboBoxListener<>(cbxSach);
-        new AutoCompleteComboBoxListener<>(cbxTheThuVien);
+        new AutoCompleteComboBoxListener<>(cbxBanDoc);
 
         btnTaoPhieuMuon.setOnAction(e->{
 

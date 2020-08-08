@@ -9,21 +9,14 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="current_session_context_class">thread</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">12345</property>
+        <property name="connection.password">admin</property>
         <mapping class="modules.entities.BanDoc"/>
-        <mapping class="modules.entities.NgonNgu"/>
         <mapping class="modules.entities.NhanVien"/>
-        <mapping class="modules.entities.Nxb"/>
         <mapping class="modules.entities.PhieuMuon"/>
         <mapping class="modules.entities.PhieuTra"/>
         <mapping class="modules.entities.Sach"/>
-        <mapping class="modules.entities.SachNgonNgu"/>
-        <mapping class="modules.entities.SachTacGia"/>
-        <mapping class="modules.entities.SachTheLoai"/>
-        <mapping class="modules.entities.TacGia"/>
-        <mapping class="modules.entities.TheLoai"/>
-        <mapping class="modules.entities.TheThuVien"/>
         <mapping class="modules.entities.ViTri"/>
+        <mapping class="modules.entities.LichSuDangNhap"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

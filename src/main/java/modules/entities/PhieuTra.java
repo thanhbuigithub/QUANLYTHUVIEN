@@ -3,22 +3,21 @@ package modules.entities;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "phieu_tra", schema = "quanlythuvien", catalog = "")
+@Table(name = "phieu_tra", schema = "quanlythuvien")
 public class PhieuTra extends RecursiveTreeObject<PhieuTra> {
-    public int id;
-    public ObjectProperty<Integer> idPhieuMuon = new SimpleObjectProperty<>();
-    public ObjectProperty<Date> ngayTra = new SimpleObjectProperty<>();
-    public ObjectProperty<String> tinhTrang = new SimpleObjectProperty<>();
-    public ObjectProperty<String> boiThuong = new SimpleObjectProperty<>();
-
-    public PhieuTra() {
-    }
+    private int id;
+    private ObjectProperty<Integer> idPhieuMuon = new SimpleObjectProperty<>();
+    private ObjectProperty<Date> ngayTra = new SimpleObjectProperty<>();
+    private StringProperty tinhTrang = new SimpleStringProperty();
+    private StringProperty boiThuong = new SimpleStringProperty();
 
     @Id
     @Column(name = "id")
@@ -57,7 +56,7 @@ public class PhieuTra extends RecursiveTreeObject<PhieuTra> {
     }
 
     public void setTinhTrang(String tinhTrang) {
-        this.tinhTrang.set(tinhTrang);
+        this.tinhTrang.setValue(tinhTrang);
     }
 
     @Basic

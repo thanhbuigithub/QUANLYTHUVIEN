@@ -5,32 +5,19 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "phieu_muon", schema = "quanlythuvien")
 public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
-    public int id;
-    public ObjectProperty<Integer> idSach = new SimpleObjectProperty<>();
-    public ObjectProperty<Integer> idTheThuVien = new SimpleObjectProperty<>();
-    public ObjectProperty<Date> ngayMuon = new SimpleObjectProperty<>();
-    public ObjectProperty<Integer> thoiHanMuon = new SimpleObjectProperty<>();
-    public ObjectProperty<Integer> giaHan = new SimpleObjectProperty<>();
-    public ObjectProperty<Integer> idNhanVien = new SimpleObjectProperty<>();
-
-    public PhieuMuon(){}
-
-    public PhieuMuon(Integer idSach, Integer idTheThuVien, Integer idNhanVien)
-    {
-        this.idSach.set(idSach);
-        this.idTheThuVien.set(idTheThuVien);
-        this.ngayMuon.set(new Date());
-        this.thoiHanMuon.set(7);
-        this.giaHan.set(0);
-        this.idNhanVien.set(idNhanVien);
-    }
-
+    private int id;
+    private ObjectProperty<Integer> idSach = new SimpleObjectProperty<>();
+    private ObjectProperty<Integer> idBanDoc = new SimpleObjectProperty<>();
+    private ObjectProperty<Date> ngayMuon = new SimpleObjectProperty<>();
+    private ObjectProperty<Integer> thoiHanMuon = new SimpleObjectProperty<>();
+    private ObjectProperty<Integer> giaHan = new SimpleObjectProperty<>();
+    private ObjectProperty<Integer> idNhanVien = new SimpleObjectProperty<>();
 
     @Id
     @Column(name = "id")
@@ -53,13 +40,13 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
     }
 
     @Basic
-    @Column(name = "id_the_thu_vien")
-    public Integer getIdTheThuVien() {
-        return idTheThuVien.get();
+    @Column(name = "id_ban_doc")
+    public Integer getIdBanDoc() {
+        return idBanDoc.get();
     }
 
-    public void setIdTheThuVien(Integer idTheThuVien) {
-        this.idTheThuVien.set(idTheThuVien);
+    public void setIdBanDoc(Integer idBanDoc) {
+        this.idBanDoc.set(idBanDoc);
     }
 
     @Basic
@@ -109,7 +96,7 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
         PhieuMuon phieuMuon = (PhieuMuon) o;
         return id == phieuMuon.id &&
                 Objects.equals(idSach, phieuMuon.idSach) &&
-                Objects.equals(idTheThuVien, phieuMuon.idTheThuVien) &&
+                Objects.equals(idBanDoc, phieuMuon.idBanDoc) &&
                 Objects.equals(ngayMuon, phieuMuon.ngayMuon) &&
                 Objects.equals(thoiHanMuon, phieuMuon.thoiHanMuon) &&
                 Objects.equals(giaHan, phieuMuon.giaHan) &&
@@ -118,19 +105,6 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idSach, idTheThuVien, ngayMuon, thoiHanMuon, giaHan, idNhanVien);
-    }
-
-    @Override
-    public String toString() {
-        return "PhieuMuon{" +
-                "id=" + id +
-                ", idSach=" + idSach.get() +
-                ", idTheThuVien=" + idTheThuVien.get() +
-                ", ngayMuon=" + ngayMuon.get() +
-                ", thoiHanMuon=" + thoiHanMuon.get() +
-                ", giaHan=" + giaHan.get() +
-                ", idNhanVien=" + idNhanVien.get() +
-                '}';
+        return Objects.hash(id, idSach, idBanDoc, ngayMuon, thoiHanMuon, giaHan, idNhanVien);
     }
 }

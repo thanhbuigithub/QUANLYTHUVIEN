@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ban_doc", schema = "quanlythuvien", catalog = "")
+@Table(name = "ban_doc", schema = "quanlythuvien")
 public class BanDoc {
     private int id;
     private String hoVaTen;
@@ -14,6 +14,7 @@ public class BanDoc {
     private String cmnd;
     private String email;
     private String sdt;
+    private Date thoiHanSuDungThe;
 
     @Id
     @Column(name = "id")
@@ -85,6 +86,16 @@ public class BanDoc {
         this.sdt = sdt;
     }
 
+    @Basic
+    @Column(name = "thoi_han_su_dung_the")
+    public Date getThoiHanSuDungThe() {
+        return thoiHanSuDungThe;
+    }
+
+    public void setThoiHanSuDungThe(Date thoiHanSuDungThe) {
+        this.thoiHanSuDungThe = thoiHanSuDungThe;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,11 +107,17 @@ public class BanDoc {
                 Objects.equals(gioiTinh, banDoc.gioiTinh) &&
                 Objects.equals(cmnd, banDoc.cmnd) &&
                 Objects.equals(email, banDoc.email) &&
-                Objects.equals(sdt, banDoc.sdt);
+                Objects.equals(sdt, banDoc.sdt) &&
+                Objects.equals(thoiHanSuDungThe, banDoc.thoiHanSuDungThe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, hoVaTen, ngaySinh, gioiTinh, cmnd, email, sdt);
+        return Objects.hash(id, hoVaTen, ngaySinh, gioiTinh, cmnd, email, sdt, thoiHanSuDungThe);
+    }
+
+    @Override
+    public String toString() {
+        return id + " - " + hoVaTen;
     }
 }

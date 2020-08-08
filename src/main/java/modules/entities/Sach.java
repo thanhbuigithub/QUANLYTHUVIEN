@@ -11,9 +11,11 @@ public class Sach {
     private int id;
     private String tenSach;
     private int namXuatBan;
-    private int maNxb;
+    private String nhaXuatBan;
+    private String ngonNgu;
+    private String tacGia;
+    private String theLoai;
     private Integer maViTri;
-    private String moTa;
     private Integer giaBia;
     private Integer soLuong;
     private int soTrang;
@@ -49,13 +51,43 @@ public class Sach {
     }
 
     @Basic
-    @Column(name = "ma_nxb")
-    public int getMaNxb() {
-        return maNxb;
+    @Column(name = "nha_xuat_ban")
+    public String getNhaXuatBan() {
+        return nhaXuatBan;
     }
 
-    public void setMaNxb(int maNxb) {
-        this.maNxb = maNxb;
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
+    }
+
+    @Basic
+    @Column(name = "ngon_ngu")
+    public String getNgonNgu() {
+        return ngonNgu;
+    }
+
+    public void setNgonNgu(String ngonNgu) {
+        this.ngonNgu = ngonNgu;
+    }
+
+    @Basic
+    @Column(name = "tac_gia")
+    public String getTacGia() {
+        return tacGia;
+    }
+
+    public void setTacGia(String tacGia) {
+        this.tacGia = tacGia;
+    }
+
+    @Basic
+    @Column(name = "the_loai")
+    public String getTheLoai() {
+        return theLoai;
+    }
+
+    public void setTheLoai(String theLoai) {
+        this.theLoai = theLoai;
     }
 
     @Basic
@@ -66,16 +98,6 @@ public class Sach {
 
     public void setMaViTri(Integer maViTri) {
         this.maViTri = maViTri;
-    }
-
-    @Basic
-    @Column(name = "mo_ta")
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
     }
 
     @Basic
@@ -115,18 +137,20 @@ public class Sach {
         Sach sach = (Sach) o;
         return id == sach.id &&
                 namXuatBan == sach.namXuatBan &&
-                maNxb == sach.maNxb &&
                 soTrang == sach.soTrang &&
                 Objects.equals(tenSach, sach.tenSach) &&
+                Objects.equals(nhaXuatBan, sach.nhaXuatBan) &&
+                Objects.equals(ngonNgu, sach.ngonNgu) &&
+                Objects.equals(tacGia, sach.tacGia) &&
+                Objects.equals(theLoai, sach.theLoai) &&
                 Objects.equals(maViTri, sach.maViTri) &&
-                Objects.equals(moTa, sach.moTa) &&
                 Objects.equals(giaBia, sach.giaBia) &&
                 Objects.equals(soLuong, sach.soLuong);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tenSach, namXuatBan, maNxb, maViTri, moTa, giaBia, soLuong, soTrang);
+        return Objects.hash(id, tenSach, namXuatBan, nhaXuatBan, ngonNgu, tacGia, theLoai, maViTri, giaBia, soLuong, soTrang);
     }
 
     @Override
