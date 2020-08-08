@@ -85,9 +85,9 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-       rootPane.heightProperty().addListener((observable, oldValue, newValue) -> {
-           mainPane.setPrefHeight(newValue.doubleValue());
-       });
+        rootPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+            mainPane.setPrefHeight(newValue.doubleValue());
+        });
 
         rootPane.widthProperty().addListener((observable, oldValue, newValue) -> {
             mainPane.setPrefWidth(newValue.doubleValue());
@@ -149,9 +149,9 @@ public class MainController implements Initializable {
     void handleToolBarClick(ActionEvent event) {
         Object target = event.getSource();
         if (target == btnMuonSach) {
-            switchFunction(MAINCOLOR.MuonSach, muonSachController.getTable(tfSearch),taoPhieuMuon);
+            switchFunction(MAINCOLOR.MuonSach, muonSachController.getTable(tfSearch), taoPhieuMuon);
         } else if (target == btnTraSach) {
-            switchFunction(MAINCOLOR.TraSach, traSachController.getTable(tfSearch),taoPhieuTra);
+            switchFunction(MAINCOLOR.TraSach, traSachController.getTable(tfSearch), taoPhieuTra);
         } else if (target == btnQuanLySach) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
@@ -244,7 +244,7 @@ public class MainController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("T\u1EA1o phi\u1EBFu tr\u1EA3");
         JFXDecorator decorator = new JFXDecorator(stage, loader.load());
-        Scene scene = new Scene(decorator, 560, 250);
+        Scene scene = new Scene(decorator, 560, 500);
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(Main.stage);
