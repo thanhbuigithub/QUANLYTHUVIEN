@@ -16,9 +16,11 @@ public class Sach extends RecursiveTreeObject<Sach> {
     private int id;
     public SimpleStringProperty tenSach = new SimpleStringProperty();
     public ObjectProperty<Integer> namXuatBan = new SimpleObjectProperty<>();
-    public ObjectProperty<Integer> maNxb = new SimpleObjectProperty<>();
+    public SimpleStringProperty nhaXuatBan = new SimpleStringProperty();
+    public SimpleStringProperty ngonNgu = new SimpleStringProperty();
+    public SimpleStringProperty tacGia = new SimpleStringProperty();
+    public SimpleStringProperty theLoai = new SimpleStringProperty();
     public ObjectProperty<Integer> maViTri = new SimpleObjectProperty<>();
-    public SimpleStringProperty moTa = new SimpleStringProperty();
     public ObjectProperty<Integer> giaBia = new SimpleObjectProperty<>();
     public ObjectProperty<Integer> soLuong = new SimpleObjectProperty<>();
     public ObjectProperty<Integer> soTrang = new SimpleObjectProperty<>();
@@ -54,13 +56,43 @@ public class Sach extends RecursiveTreeObject<Sach> {
     }
 
     @Basic
-    @Column(name = "ma_nxb")
-    public Integer getMaNxb() {
-        return maNxb.get();
+    @Column(name = "nha_xuat_ban")
+    public String getNhaXuatBan() {
+        return nhaXuatBan.get();
     }
 
-    public void setMaNxb(Integer maNxb) {
-        this.maNxb.set(maNxb);
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan.set(nhaXuatBan);
+    }
+
+    @Basic
+    @Column(name = "ngon_ngu")
+    public String getNgonNgu() {
+        return ngonNgu.get();
+    }
+
+    public void setNgonNgu(String ngonNgu) {
+        this.ngonNgu.set(ngonNgu);
+    }
+
+    @Basic
+    @Column(name = "tac_gia")
+    public String getTacGia() {
+        return tacGia.get();
+    }
+
+    public void setTacGia(String tacGia) {
+        this.tacGia.set(tacGia);
+    }
+
+    @Basic
+    @Column(name = "the_loai")
+    public String getTheLoai() {
+        return theLoai.get();
+    }
+
+    public void setTheLoai(String theLoai) {
+        this.theLoai.set(theLoai);
     }
 
     @Basic
@@ -71,16 +103,6 @@ public class Sach extends RecursiveTreeObject<Sach> {
 
     public void setMaViTri(Integer maViTri) {
         this.maViTri.set(maViTri);
-    }
-
-    @Basic
-    @Column(name = "mo_ta")
-    public String getMoTa() {
-        return moTa.get();
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa.set(moTa);
     }
 
     @Basic
@@ -120,18 +142,20 @@ public class Sach extends RecursiveTreeObject<Sach> {
         Sach sach = (Sach) o;
         return id == sach.id &&
                 namXuatBan == sach.namXuatBan &&
-                maNxb == sach.maNxb &&
                 soTrang == sach.soTrang &&
                 Objects.equals(tenSach, sach.tenSach) &&
+                Objects.equals(nhaXuatBan, sach.nhaXuatBan) &&
+                Objects.equals(ngonNgu, sach.ngonNgu) &&
+                Objects.equals(tacGia, sach.tacGia) &&
+                Objects.equals(theLoai, sach.theLoai) &&
                 Objects.equals(maViTri, sach.maViTri) &&
-                Objects.equals(moTa, sach.moTa) &&
                 Objects.equals(giaBia, sach.giaBia) &&
                 Objects.equals(soLuong, sach.soLuong);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tenSach, namXuatBan, maNxb, maViTri, moTa, giaBia, soLuong, soTrang);
+        return Objects.hash(id, tenSach, namXuatBan, nhaXuatBan, ngonNgu, tacGia, theLoai, maViTri, giaBia, soLuong, soTrang);
     }
 
     @Override

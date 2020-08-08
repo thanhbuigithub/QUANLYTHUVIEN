@@ -51,29 +51,28 @@ public class MuonSachController {
         colBanDoc.setCellValueFactory((param) -> {
             if (colBanDoc.validateValue(param)) {
                 PhieuMuon phieuMuon = param.getValue().getValue();
-                TheThuVien theThuVien = TheThuVienDAO.getInstance().getByID(phieuMuon.getIdTheThuVien());
-                BanDoc banDoc = BanDocDAO.getInstance().getByID(theThuVien.getIdBanDoc());
-                return new SimpleStringProperty(theThuVien.getIdBanDoc() + " - " + banDoc.getHoVaTen());
+                BanDoc banDoc = BanDocDAO.getInstance().getByID(phieuMuon.getIdBanDoc());
+                return new SimpleStringProperty(banDoc.getId() + " - " + banDoc.getHoVaTen());
             } else return colBanDoc.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colBanDoc);
 
         colNgayMuon.setCellValueFactory((param) -> {
             if (colNgayMuon.validateValue(param)) {
-                return param.getValue().getValue().ngayMuon;
+                return new SimpleObjectProperty<>(param.getValue().getValue().getNgayMuon());
             } else return colNgayMuon.getComputedValue(param);
         });
         CellFactory.getInstance().DateValueFactory(colNgayMuon);
 
         colThoiHanMuon.setCellValueFactory((param) -> {
             if (colThoiHanMuon.validateValue(param)) {
-                return param.getValue().getValue().thoiHanMuon;
+                return new SimpleObjectProperty<>(param.getValue().getValue().getThoiHanMuon());
             } else return colThoiHanMuon.getComputedValue(param);
         });
 
         colGiaHan.setCellValueFactory((param) -> {
             if (colThoiHanMuon.validateValue(param)) {
-                return param.getValue().getValue().giaHan;
+                return new SimpleObjectProperty<>(param.getValue().getValue().getGiaHan());
             } else return colThoiHanMuon.getComputedValue(param);
         });
 
@@ -107,8 +106,8 @@ public class MuonSachController {
                     JFXButton btnNO = new JFXButton("NO");
                     btnYES.setOnAction(event -> {
                         PhieuMuon phieuMuon = getTreeTableView().getTreeItem(getIndex()).getValue();
-                        phieuMuon.giaHan.set(phieuMuon.giaHan.get() + 1);
-                        phieuMuon.thoiHanMuon.set(phieuMuon.thoiHanMuon.get() + 7);
+                        phieuMuon.setGiaHan(phieuMuon.getGiaHan() + 1);
+                        phieuMuon.setThoiHanMuon(phieuMuon.getThoiHanMuon() + 7);
                         PhieuMuonDAO.getInstance().update(phieuMuon);
                     });
                     AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n n\u00E0y trong 7 ng\u00E0y?");
@@ -136,12 +135,11 @@ public class MuonSachController {
             table.setPredicate(pmProperty -> {
                 PhieuMuon pm = pmProperty.getValue();
                 Sach sach = SachDAO.getInstance().getByID(pm.getIdSach());
-                TheThuVien theThuVien = TheThuVienDAO.getInstance().getByID(pm.getIdTheThuVien());
-                BanDoc banDoc = BanDocDAO.getInstance().getByID(theThuVien.getIdBanDoc());
+                BanDoc banDoc = BanDocDAO.getInstance().getByID(pm.getIdBanDoc());
                 NhanVien nhanVien = NhanVienDAO.getInstance().getByID(pm.getIdNhanVien());
 
                 return pm.getIdSach().toString().contains(newValueNoAccent)
-                        || pm.getIdTheThuVien().toString().contains(newValueNoAccent)
+                        || pm.getIdBanDoc().toString().contains(newValueNoAccent)
                         || pm.getIdNhanVien().toString().contains(newValueNoAccent)
                         || VNCharacterUtils.removeAccent(sach.getTenSach()).toLowerCase().contains(newValueNoAccent)
                         || VNCharacterUtils.removeAccent(banDoc.getHoVaTen()).toLowerCase().contains(newValueNoAccent)

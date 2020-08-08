@@ -1,9 +1,7 @@
 package modules.dao;
 
 import controller.GlobalDataSession;
-import modules.entities.NhanVien;
 import modules.entities.PhieuMuon;
-import modules.entities.Sach;
 import org.hibernate.Session;
 
 import java.util.List;

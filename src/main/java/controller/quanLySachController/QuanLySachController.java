@@ -63,8 +63,7 @@ public class QuanLySachController {
         colNhaXuatBan.setCellValueFactory((param) -> {
             if (colNhaXuatBan.validateValue(param)) {
                 Sach sach = param.getValue().getValue();
-                Nxb nxb = NhaXuatBanDAO.getInstance().getByID(sach.getMaNxb());
-                return new SimpleObjectProperty<>(nxb.getTenNxb());
+                return new SimpleStringProperty(sach.getNhaXuatBan());
             } else return colNhaXuatBan.getComputedValue(param);
         });
         CellFactory.getInstance().StringCenterValueFactory(colNhaXuatBan);
@@ -72,8 +71,7 @@ public class QuanLySachController {
         colNgonNgu.setCellValueFactory((param) -> {
             if (colNgonNgu.validateValue(param)) {
                 Sach sach = param.getValue().getValue();
-                List<SachNgonNgu> list = SachNgonNguDAO.getInstance().getByIDSach(sach.getId());
-                return new SimpleStringProperty(listSNNToString(list));
+                return new SimpleStringProperty(sach.getNgonNgu());
             } else return colNgonNgu.getComputedValue(param);
         });
         CellFactory.getInstance().StringCenterValueFactory(colNgonNgu);
@@ -81,8 +79,7 @@ public class QuanLySachController {
         colTacGia.setCellValueFactory((param) -> {
             if (colTacGia.validateValue(param)) {
                 Sach sach = param.getValue().getValue();
-                List<SachTacGia> list = SachTacGiaDAO.getInstance().getByIDSach(sach.getId());
-                return new SimpleStringProperty(listSTGToString(list));
+                return new SimpleStringProperty(sach.getTacGia());
             } else return colTacGia.getComputedValue(param);
         });
         CellFactory.getInstance().StringCenterValueFactory(colTacGia);
@@ -90,8 +87,7 @@ public class QuanLySachController {
         colTheLoai.setCellValueFactory((param) -> {
             if (colTheLoai.validateValue(param)) {
                 Sach sach = param.getValue().getValue();
-                List<SachTheLoai> list = SachTheLoaiDAO.getInstance().getByIDSach(sach.getId());
-                return new SimpleStringProperty(listSTLToString(list));
+                return new SimpleStringProperty(sach.getTheLoai());
             } else return colTheLoai.getComputedValue(param);
         });
         CellFactory.getInstance().StringCenterValueFactory(colTheLoai);
@@ -172,52 +168,18 @@ public class QuanLySachController {
         });
     }
 
-    private String listSNNToString(List<SachNgonNgu> list){
-        StringBuilder stringBuilder = new StringBuilder();
-        list.forEach(snn->{
-            stringBuilder.append(NgonNguDAO.getInstance().getByID(snn.getIdNgonNgu()).getTenNgonNgu());
-            stringBuilder.append(SEPARATOR);
-        });
-        String ngonNgu = stringBuilder.toString();
-        return ngonNgu.substring(0, ngonNgu.length() - SEPARATOR.length());
-    }
-
-    private String listSTGToString(List<SachTacGia> list){
-        StringBuilder stringBuilder = new StringBuilder();
-        list.forEach(stg->{
-            stringBuilder.append(TacGiaDAO.getInstance().getByID(stg.getIdTacGia()).getTenTacGia());
-            stringBuilder.append(SEPARATOR);
-        });
-        String tacGia = stringBuilder.toString();
-        return tacGia.substring(0, tacGia.length() - SEPARATOR.length());
-    }
-
-    private String listSTLToString(List<SachTheLoai> list){
-        StringBuilder stringBuilder = new StringBuilder();
-        list.forEach(stl->{
-            stringBuilder.append(TheLoaiDAO.getInstance().getByID(stl.getIdTheLoai()).getTenTheLoai());
-            stringBuilder.append(SEPARATOR);
-        });
-        String theLoai = stringBuilder.toString();
-        return theLoai.substring(0, theLoai.length() - SEPARATOR.length());
-    }
-
     public void setPredicateTable(JFXTextField tfSearch) {
         tfSearch.textProperty().addListener((o, oldVal, newVal) -> {
             String newValueNoAccent = VNCharacterUtils.removeAccent(newVal);
             table.setPredicate(sachProperty -> {
                 Sach sach = sachProperty.getValue();
-                Nxb nxb = NhaXuatBanDAO.getInstance().getByID(sach.getMaNxb());
-                List<SachNgonNgu> listNgonNgu = SachNgonNguDAO.getInstance().getByIDSach(sach.getId());
-                List<SachTacGia> listTacGia = SachTacGiaDAO.getInstance().getByIDSach(sach.getId());
-                List<SachTheLoai> listTheLoai = SachTheLoaiDAO.getInstance().getByIDSach(sach.getId());
 
                 return VNCharacterUtils.removeAccent(sach.getTenSach()).contains(newValueNoAccent)
                         || String.valueOf(sach.getNamXuatBan()).contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(nxb.getTenNxb()).contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(listSNNToString(listNgonNgu)).toLowerCase().contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(listSTGToString(listTacGia)).toLowerCase().contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(listSTLToString(listTheLoai)).toLowerCase().contains(newValueNoAccent);
+                        || VNCharacterUtils.removeAccent(sach.getNhaXuatBan()).contains(newValueNoAccent)
+                        || VNCharacterUtils.removeAccent(sach.getNgonNgu()).toLowerCase().contains(newValueNoAccent)
+                        || VNCharacterUtils.removeAccent(sach.getTacGia()).toLowerCase().contains(newValueNoAccent)
+                        || VNCharacterUtils.removeAccent(sach.getTheLoai()).toLowerCase().contains(newValueNoAccent);
             });
         });
     }

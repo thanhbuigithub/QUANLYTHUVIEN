@@ -1,8 +1,6 @@
 package modules.dao;
 
 import controller.GlobalDataSession;
-import modules.entities.BanDoc;
-import modules.entities.PhieuMuon;
 import modules.entities.Sach;
 import org.hibernate.Session;
 
