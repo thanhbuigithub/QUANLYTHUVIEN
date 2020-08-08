@@ -5,7 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +18,19 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
     private ObjectProperty<Integer> thoiHanMuon = new SimpleObjectProperty<>();
     private ObjectProperty<Integer> giaHan = new SimpleObjectProperty<>();
     private ObjectProperty<Integer> idNhanVien = new SimpleObjectProperty<>();
+
+    public PhieuMuon(){}
+
+    public PhieuMuon(Integer idSach, Integer idTheThuVien, Integer idNhanVien)
+    {
+        this.idSach.set(idSach);
+        this.idBanDoc.set(idTheThuVien);
+        this.ngayMuon.set(new Date());
+        this.thoiHanMuon.set(7);
+        this.giaHan.set(0);
+        this.idNhanVien.set(idNhanVien);
+    }
+
 
     @Id
     @Column(name = "id")
@@ -96,7 +109,7 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
         PhieuMuon phieuMuon = (PhieuMuon) o;
         return id == phieuMuon.id &&
                 Objects.equals(idSach, phieuMuon.idSach) &&
-                Objects.equals(idBanDoc, phieuMuon.idBanDoc) &&
+                Objects.equals(idBanDoc, phieuMuon.idTheThuVien) &&
                 Objects.equals(ngayMuon, phieuMuon.ngayMuon) &&
                 Objects.equals(thoiHanMuon, phieuMuon.thoiHanMuon) &&
                 Objects.equals(giaHan, phieuMuon.giaHan) &&
@@ -106,5 +119,18 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
     @Override
     public int hashCode() {
         return Objects.hash(id, idSach, idBanDoc, ngayMuon, thoiHanMuon, giaHan, idNhanVien);
+    }
+
+    @Override
+    public String toString() {
+        return "PhieuMuon{" +
+                "id=" + id +
+                ", idSach=" + idSach.get() +
+                ", idTheThuVien=" + idBanDoc.get() +
+                ", ngayMuon=" + ngayMuon.get() +
+                ", thoiHanMuon=" + thoiHanMuon.get() +
+                ", giaHan=" + giaHan.get() +
+                ", idNhanVien=" + idNhanVien.get() +
+                '}';
     }
 }

@@ -27,7 +27,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="6d45768d-73bb-4811-8c95-1244bd6d08e6">
-      <console name="Connection" type="STANDARD" schema="quanlythuvien" session="Main"><![CDATA[select * from nxb]]></console>
+      <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

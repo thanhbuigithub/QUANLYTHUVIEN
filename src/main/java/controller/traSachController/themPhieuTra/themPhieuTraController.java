@@ -2,67 +2,63 @@ package controller.traSachController.themPhieuTra;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import controller.AutoCompleteComboBoxListener;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
-import modules.dao.BanDocDAO;
+import modules.dao.PhieuTraDAO;
 import modules.dao.SachDAO;
-import modules.entities.BanDoc;
+import modules.dao.TheThuVienDAO;
+import modules.entities.PhieuTra;
 import modules.entities.Sach;
+import modules.entities.TheThuVien;
 
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 public class themPhieuTraController implements Initializable {
 
     @FXML
-    private JFXComboBox<Sach> cbxSach;
+    private JFXComboBox<String> cbxIdPhieuMuon;
 
     @FXML
-    private JFXComboBox<BanDoc> cbxBanDoc;
+    private JFXDatePicker jfxDatePickerNgayTra;
+
+    @FXML
+    private JFXComboBox<String> cbxTinhTrang;
+
+    @FXML
+    private JFXComboBox<String> cbxBoiThuong;
 
     @FXML
     private JFXButton btnTaoPhieuTra;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Sach> listSach = SachDAO.getInstance().all();
-        cbxSach.setItems(FXCollections.observableArrayList(listSach));
-        cbxSach.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Sach object) {
-                if (object == null) return null;
-                return object.toString();
-            }
+        List<PhieuTra> listPhieuTra = PhieuTraDAO.getInstance().all();
+        List<String> listID = new ArrayList<>();
+        Set<String> listTinhTrang = new HashSet<>();
+        Set<String> listBoiThuong = new HashSet<>();
+        for (PhieuTra pt : listPhieuTra
+        ) {
+            listID.add(pt.idPhieuMuon.get().toString());
+            listTinhTrang.add(pt.tinhTrang.get());
+            listBoiThuong.add(pt.boiThuong.get());
+        }
+        cbxIdPhieuMuon.setItems(FXCollections.observableArrayList(listID));
+        cbxTinhTrang.setItems(FXCollections.observableArrayList(listTinhTrang));
+        cbxBoiThuong.setItems(FXCollections.observableArrayList(listBoiThuong));
+        jfxDatePickerNgayTra.setValue(LocalDate.now());
 
-            @Override
-            public Sach fromString(String string) {
-                return listSach.stream().filter(dd -> dd.toString().equals(string)).findAny().orElse(null);
-            }
-        });
+        new AutoCompleteComboBoxListener<>(cbxIdPhieuMuon);
+        new AutoCompleteComboBoxListener<>(cbxTinhTrang);
+        new AutoCompleteComboBoxListener<>(cbxBoiThuong);
 
-        List<BanDoc> listBanDoc = BanDocDAO.getInstance().all();
-        cbxBanDoc.setItems(FXCollections.observableArrayList(listBanDoc));
-        cbxBanDoc.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(BanDoc object) {
-                if (object == null) return null;
-                return object.toString();
-            }
-
-            @Override
-            public BanDoc fromString(String string) {
-                return listBanDoc.stream().filter(dd -> dd.toString().equals(string)).findAny().orElse(null);
-            }
-        });
-
-        new AutoCompleteComboBoxListener<>(cbxSach);
-        new AutoCompleteComboBoxListener<>(cbxBanDoc);
-
-        btnTaoPhieuTra.setOnAction(e->{
+        btnTaoPhieuTra.setOnAction(e -> {
 
         });
     }

@@ -21,7 +21,6 @@ import javafx.scene.layout.StackPane;
 import modules.dao.*;
 import modules.entities.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,10 +30,10 @@ public class TraSachController {
     private JFXTreeTableColumn<PhieuTra, String> colSach = new JFXTreeTableColumn<>("S\u00E1ch");
     private JFXTreeTableColumn<PhieuTra, String> colBanDoc = new JFXTreeTableColumn<>("B\u1EA1n \u0110\u1ECDc");
     private JFXTreeTableColumn<PhieuTra, Date> colNgayMuon = new JFXTreeTableColumn<>("Ng\u00E0y M\u01B0\u1EE3n");
-    private JFXTreeTableColumn<PhieuTra, Date> colNgayTra = new JFXTreeTableColumn<>("Ng\u00E0y Tr\u1EA3");
+    private JFXTreeTableColumn<PhieuTra, Date> colNgayHenTra = new JFXTreeTableColumn<>("Ng\u00E0y H\u1EB9n Tr\u1EA3");
+    private JFXTreeTableColumn<PhieuTra, Date> colHanChot = new JFXTreeTableColumn<>("H\u1EA1n ch\u00F3t");
     private JFXTreeTableColumn<PhieuTra, String> colTinhTrang = new JFXTreeTableColumn<>("T\u00ECnh Tr\u1EA1ng");
     private JFXTreeTableColumn<PhieuTra, String> colBoiThuong = new JFXTreeTableColumn<>("B\u1ED3i th\u01B0\u1EDDng");
-    private JFXTreeTableColumn<PhieuTra, String> colNhanVien = new JFXTreeTableColumn<>("Nh\u00E2n Vi\u00EAn");
 
     ObservableList<PhieuTra> pts = FXCollections.observableArrayList();
 
@@ -55,8 +54,9 @@ public class TraSachController {
             if (colBanDoc.validateValue(param)) {
                 PhieuTra phieuTra = param.getValue().getValue();
                 PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
-                BanDoc banDoc = BanDocDAO.getInstance().getByID(phieuMuon.getIdBanDoc());
-                return new SimpleStringProperty(banDoc.getId() + " - " + banDoc.getHoVaTen());
+                TheThuVien theThuVien = TheThuVienDAO.getInstance().getByID(phieuMuon.getIdTheThuVien());
+                BanDoc banDoc = BanDocDAO.getInstance().getByID(theThuVien.getIdBanDoc());
+                return new SimpleStringProperty(theThuVien.getIdBanDoc() + " - " + banDoc.getHoVaTen());
             } else return colBanDoc.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colBanDoc);
@@ -65,48 +65,50 @@ public class TraSachController {
             if (colNgayMuon.validateValue(param)) {
                 PhieuTra phieuTra = param.getValue().getValue();
                 PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
-                return new SimpleObjectProperty<>(phieuMuon.getNgayMuon());
+                return phieuMuon.ngayMuon;
             } else return colNgayMuon.getComputedValue(param);
         });
         CellFactory.getInstance().DateValueFactory(colNgayMuon);
 
-        colNgayTra.setCellValueFactory((param) -> {
-            if (colNgayTra.validateValue(param)) {
-                return new SimpleObjectProperty<>(param.getValue().getValue().getNgayTra());
-            } else return colNgayTra.getComputedValue(param);
+        colNgayHenTra.setCellValueFactory((param) -> {
+            if (colNgayHenTra.validateValue(param)) {
+                PhieuTra phieuTra = param.getValue().getValue();
+                PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(phieuMuon.getNgayMuon());
+                calendar.add(Calendar.DAY_OF_MONTH, phieuMuon.thoiHanMuon.get());
+                return new SimpleObjectProperty<>(calendar.getTime());
+            } else return colNgayHenTra.getComputedValue(param);
         });
-        CellFactory.getInstance().DateValueFactory(colNgayTra);
+        CellFactory.getInstance().DateValueFactory(colNgayHenTra);
+
+        colHanChot.setCellValueFactory((param) -> {
+            if (colHanChot.validateValue(param)) {
+                return param.getValue().getValue().ngayTra;
+            } else return colHanChot.getComputedValue(param);
+        });
+        CellFactory.getInstance().DateValueFactory(colHanChot);
 
         colTinhTrang.setCellValueFactory((param) -> {
             if (colTinhTrang.validateValue(param)) {
-                return new SimpleStringProperty(param.getValue().getValue().getTinhTrang());
+                return param.getValue().getValue().tinhTrang;
             } else return colTinhTrang.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colTinhTrang);
 
         colBoiThuong.setCellValueFactory((param) -> {
             if (colBoiThuong.validateValue(param)) {
-                return new SimpleStringProperty(param.getValue().getValue().getBoiThuong());
+                return param.getValue().getValue().boiThuong;
             } else return colBoiThuong.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colBoiThuong);
 
-        colNhanVien.setCellValueFactory((param) -> {
-            if (colNhanVien.validateValue(param)) {
-                PhieuTra phieuTra = param.getValue().getValue();
-                PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
-                NhanVien nhanVien = NhanVienDAO.getInstance().getByID(phieuMuon.getIdNhanVien());
-                return new SimpleStringProperty(phieuMuon.getIdNhanVien() + " - " + nhanVien.getHoVaTen());
-
-            } else return colNhanVien.getComputedValue(param);
-        });
-        CellFactory.getInstance().StringValueFactory(colNhanVien);
         final TreeItem<PhieuTra> root = new RecursiveTreeItem<>(pts, RecursiveTreeObject::getChildren);
 
         table.setRoot(root);
         table.setShowRoot(false);
         table.setEditable(true);
-        table.getColumns().setAll(colSach, colBanDoc, colNgayMuon, colNgayTra, colTinhTrang, colBoiThuong, colNhanVien);
+        table.getColumns().setAll(colSach, colBanDoc, colNgayMuon, colNgayHenTra, colHanChot, colTinhTrang, colBoiThuong);
         table.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
 
         table.setRowFactory(value -> new JFXTreeTableRow<>() {
