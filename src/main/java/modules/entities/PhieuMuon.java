@@ -109,7 +109,7 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
         PhieuMuon phieuMuon = (PhieuMuon) o;
         return id == phieuMuon.id &&
                 Objects.equals(idSach, phieuMuon.idSach) &&
-                Objects.equals(idBanDoc, phieuMuon.idTheThuVien) &&
+                Objects.equals(idBanDoc, phieuMuon.idBanDoc) &&
                 Objects.equals(ngayMuon, phieuMuon.ngayMuon) &&
                 Objects.equals(thoiHanMuon, phieuMuon.thoiHanMuon) &&
                 Objects.equals(giaHan, phieuMuon.giaHan) &&

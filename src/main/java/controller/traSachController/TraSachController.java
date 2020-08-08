@@ -54,9 +54,8 @@ public class TraSachController {
             if (colBanDoc.validateValue(param)) {
                 PhieuTra phieuTra = param.getValue().getValue();
                 PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
-                TheThuVien theThuVien = TheThuVienDAO.getInstance().getByID(phieuMuon.getIdTheThuVien());
-                BanDoc banDoc = BanDocDAO.getInstance().getByID(theThuVien.getIdBanDoc());
-                return new SimpleStringProperty(theThuVien.getIdBanDoc() + " - " + banDoc.getHoVaTen());
+                BanDoc banDoc = BanDocDAO.getInstance().getByID(phieuMuon.getIdBanDoc());
+                return new SimpleStringProperty(phieuMuon.getIdBanDoc() + " - " + banDoc.getHoVaTen());
             } else return colBanDoc.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colBanDoc);
@@ -65,7 +64,7 @@ public class TraSachController {
             if (colNgayMuon.validateValue(param)) {
                 PhieuTra phieuTra = param.getValue().getValue();
                 PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
-                return phieuMuon.ngayMuon;
+                return new SimpleObjectProperty<>(phieuMuon.getNgayMuon());
             } else return colNgayMuon.getComputedValue(param);
         });
         CellFactory.getInstance().DateValueFactory(colNgayMuon);
@@ -76,7 +75,7 @@ public class TraSachController {
                 PhieuMuon phieuMuon = PhieuMuonDAO.getInstance().getByID(phieuTra.getIdPhieuMuon());
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(phieuMuon.getNgayMuon());
-                calendar.add(Calendar.DAY_OF_MONTH, phieuMuon.thoiHanMuon.get());
+                calendar.add(Calendar.DAY_OF_MONTH, phieuMuon.getThoiHanMuon());
                 return new SimpleObjectProperty<>(calendar.getTime());
             } else return colNgayHenTra.getComputedValue(param);
         });
@@ -84,21 +83,21 @@ public class TraSachController {
 
         colHanChot.setCellValueFactory((param) -> {
             if (colHanChot.validateValue(param)) {
-                return param.getValue().getValue().ngayTra;
+                return new SimpleObjectProperty<>(param.getValue().getValue().getNgayTra());
             } else return colHanChot.getComputedValue(param);
         });
         CellFactory.getInstance().DateValueFactory(colHanChot);
 
         colTinhTrang.setCellValueFactory((param) -> {
             if (colTinhTrang.validateValue(param)) {
-                return param.getValue().getValue().tinhTrang;
+                return new SimpleObjectProperty<>(param.getValue().getValue().getTinhTrang());
             } else return colTinhTrang.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colTinhTrang);
 
         colBoiThuong.setCellValueFactory((param) -> {
             if (colBoiThuong.validateValue(param)) {
-                return param.getValue().getValue().boiThuong;
+                return new SimpleObjectProperty<>(param.getValue().getValue().getBoiThuong());
             } else return colBoiThuong.getComputedValue(param);
         });
         CellFactory.getInstance().StringValueFactory(colBoiThuong);

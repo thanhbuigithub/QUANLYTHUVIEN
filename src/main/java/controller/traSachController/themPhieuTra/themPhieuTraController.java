@@ -11,10 +11,8 @@ import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
 import modules.dao.PhieuTraDAO;
 import modules.dao.SachDAO;
-import modules.dao.TheThuVienDAO;
 import modules.entities.PhieuTra;
 import modules.entities.Sach;
-import modules.entities.TheThuVien;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -45,9 +43,9 @@ public class themPhieuTraController implements Initializable {
         Set<String> listBoiThuong = new HashSet<>();
         for (PhieuTra pt : listPhieuTra
         ) {
-            listID.add(pt.idPhieuMuon.get().toString());
-            listTinhTrang.add(pt.tinhTrang.get());
-            listBoiThuong.add(pt.boiThuong.get());
+            listID.add(pt.getIdPhieuMuon().toString());
+            listTinhTrang.add(pt.getTinhTrang());
+            listBoiThuong.add(pt.getBoiThuong());
         }
         cbxIdPhieuMuon.setItems(FXCollections.observableArrayList(listID));
         cbxTinhTrang.setItems(FXCollections.observableArrayList(listTinhTrang));
