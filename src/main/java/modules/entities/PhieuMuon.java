@@ -5,6 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -19,10 +20,10 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
     public ObjectProperty<Integer> giaHan = new SimpleObjectProperty<>();
     public ObjectProperty<Integer> idNhanVien = new SimpleObjectProperty<>();
 
-    public PhieuMuon(){}
+    public PhieuMuon() {
+    }
 
-    public PhieuMuon(Integer idSach, Integer idTheThuVien, Integer idNhanVien)
-    {
+    public PhieuMuon(Integer idSach, Integer idTheThuVien, Integer idNhanVien) {
         this.idSach.set(idSach);
         this.idTheThuVien.set(idTheThuVien);
         this.ngayMuon.set(new Date());
