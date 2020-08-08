@@ -74,12 +74,25 @@ public class MainController implements Initializable {
 
     private JFXButton taoPhieuTra = new JFXButton("T\u1EA1o phi\u1EBFu tr\u1EA3");
 
-    private ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
+    private final ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
+    private final ObjectProperty<JFXButton> btnCreateSelected = new SimpleObjectProperty<>();
 
     private final Double speed = 0.5;
 
+    MuonSachController muonSachController;
+    TraSachController traSachController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+       rootPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+           mainPane.setPrefHeight(newValue.doubleValue());
+       });
+
+        rootPane.widthProperty().addListener((observable, oldValue, newValue) -> {
+            mainPane.setPrefWidth(newValue.doubleValue());
+        });
+
         SelectButton(btnMuonSach);
         selectedBtn.set(btnMuonSach);
 
@@ -101,8 +114,11 @@ public class MainController implements Initializable {
         });
 
         mainPane.setRight(null);
-        JFXTreeTableView table = new MuonSachController(rootPane, mainPane).getTable(tfSearch);
-        tablePane.setCenter(table);
+
+        muonSachController = new MuonSachController(rootPane, mainPane);
+        traSachController = new TraSachController(rootPane, mainPane);
+
+        tablePane.setCenter(muonSachController.getTable(tfSearch));
 
         taoPhieuMuon.setOnAction(e -> {
             try {
@@ -115,54 +131,27 @@ public class MainController implements Initializable {
         AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
         AnchorPane.setTopAnchor(taoPhieuMuon, (double) 15);
         topPane.getChildren().add(taoPhieuMuon);
+        btnCreateSelected.set(taoPhieuMuon);
+
+        taoPhieuTra.setOnAction(e -> {
+            try {
+                taoPhieuTra();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        taoPhieuTra.getStyleClass().add("add-button");
+        AnchorPane.setRightAnchor(taoPhieuTra, (double) 10);
+        AnchorPane.setTopAnchor(taoPhieuTra, (double) 15);
     }
 
     @FXML
     void handleToolBarClick(ActionEvent event) {
         Object target = event.getSource();
         if (target == btnMuonSach) {
-            tablePane.setCenter(null);
-            topPane.getChildren().remove(taoPhieuTra);
-            SelectButton(btnMuonSach);
-            UnSelectButton(btnTraSach);
-            selectedBtn.set(btnMuonSach);
-            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.MuonSach);
-            topPane.setStyle("-fx-background-color: " + MAINCOLOR.MuonSach);
-            JFXTreeTableView table = new MuonSachController(rootPane, mainPane).getTable(tfSearch);
-            tablePane.setCenter(table);
-
-            taoPhieuMuon.setOnAction(e -> {
-                try {
-                    taoPhieuMuon();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            });
-            taoPhieuMuon.getStyleClass().add("add-button");
-            AnchorPane.setRightAnchor(taoPhieuMuon, (double) 10);
-            AnchorPane.setTopAnchor(taoPhieuMuon, (double) 15);
-            topPane.getChildren().add(taoPhieuMuon);
+            switchFunction(MAINCOLOR.MuonSach, muonSachController.getTable(tfSearch),taoPhieuMuon);
         } else if (target == btnTraSach) {
-            tablePane.setCenter(null);
-            topPane.getChildren().remove(taoPhieuMuon);
-            UnSelectButton(btnMuonSach);
-            SelectButton(btnTraSach);
-            selectedBtn.set(btnTraSach);
-            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TraSach);
-            topPane.setStyle("-fx-background-color: " + MAINCOLOR.TraSach);
-            JFXTreeTableView table = new TraSachController(rootPane, mainPane).getTable(tfSearch);
-            tablePane.setCenter(table);
-            taoPhieuTra.setOnAction(e -> {
-                try {
-                    taoPhieuTra();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            });
-            taoPhieuTra.getStyleClass().add("add-button");
-            AnchorPane.setRightAnchor(taoPhieuTra, (double) 10);
-            AnchorPane.setTopAnchor(taoPhieuTra, (double) 15);
-            topPane.getChildren().add(taoPhieuTra);
+            switchFunction(MAINCOLOR.TraSach, traSachController.getTable(tfSearch),taoPhieuTra);
         } else if (target == btnQuanLySach) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.QuanLySach);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.QuanLySach);
@@ -260,5 +249,14 @@ public class MainController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(Main.stage);
         stage.showAndWait();
+    }
+
+    private void switchFunction(String color, JFXTreeTableView table, JFXButton btnCreate) {
+        tablePane.setStyle("-fx-border-color: " + color);
+        topPane.setStyle("-fx-background-color: " + color);
+        tablePane.setCenter(table);
+        topPane.getChildren().remove(btnCreateSelected.get());
+        topPane.getChildren().add(btnCreate);
+        btnCreateSelected.set(btnCreate);
     }
 }

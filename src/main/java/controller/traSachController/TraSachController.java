@@ -121,7 +121,7 @@ public class TraSachController {
                     JFXButton btnNO = new JFXButton("NO");
                     btnYES.setOnAction(event -> {
                         PhieuTra phieuTra = getTreeTableView().getTreeItem(getIndex()).getValue();
-                        if (PhieuMuonDAO.getInstance().remove(phieuTra)) {
+                        if (PhieuTraDAO.getInstance().remove(phieuTra)) {
                             getTreeTableView().getRoot().getChildren().remove(getIndex());
                         }
                     });
@@ -135,20 +135,10 @@ public class TraSachController {
     public void setPredicateTable(JFXTextField tfSearch) {
         tfSearch.textProperty().addListener((o, oldVal, newVal) -> {
             String newValueNoAccent = VNCharacterUtils.removeAccent(newVal);
-            table.setPredicate(pmProperty -> {
-                PhieuTra pt = pmProperty.getValue();
-                PhieuMuon pm = PhieuMuonDAO.getInstance().getByID(pt.idPhieuMuon.get());
-                Sach sach = SachDAO.getInstance().getByID(pm.getIdSach());
-                TheThuVien theThuVien = TheThuVienDAO.getInstance().getByID(pm.getIdTheThuVien());
-                BanDoc banDoc = BanDocDAO.getInstance().getByID(theThuVien.getIdBanDoc());
-                NhanVien nhanVien = NhanVienDAO.getInstance().getByID(pm.getIdNhanVien());
+            table.setPredicate(ptProperty -> {
+                PhieuTra pt = ptProperty.getValue();
 
-                return pm.getIdSach().toString().contains(newValueNoAccent)
-                        || pm.getIdTheThuVien().toString().contains(newValueNoAccent)
-                        || pm.getIdNhanVien().toString().contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(sach.getTenSach()).toLowerCase().contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(banDoc.getHoVaTen()).toLowerCase().contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(nhanVien.getHoVaTen()).toLowerCase().contains(newValueNoAccent);
+                return pt.getIdPhieuMuon().toString().contains(newValueNoAccent);
             });
         });
     }
