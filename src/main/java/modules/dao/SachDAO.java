@@ -1,6 +1,8 @@
 package modules.dao;
 
 import controller.GlobalDataSession;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import modules.entities.Sach;
 import org.hibernate.Session;
 
@@ -15,7 +17,7 @@ public class SachDAO extends AbstractDAO<Sach>{
 
     private Session session = GlobalDataSession.getSession();
 
-    public List<Sach> all = null;
+    public ObservableList<Sach> all = FXCollections.observableArrayList();
 
     public Sach getByID(Integer id){
         return all().parallelStream().filter(e->e.getId()==id).findAny().orElse(null);
@@ -26,9 +28,15 @@ public class SachDAO extends AbstractDAO<Sach>{
         return instance;
     }
 
-    public List<Sach> all(){
-        if(all==null)
-            return instance.getAll();
-        else return all;
+    public ObservableList<Sach> all(){
+        if(all.isEmpty()){
+            all.addAll(instance.getAll());
+        }
+        return all;
+    }
+
+    public void reload(){
+        all.clear();
+        all.addAll(instance.getAll());
     }
 }

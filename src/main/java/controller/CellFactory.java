@@ -1,7 +1,10 @@
 package controller;
 
 import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
+import com.jfoenix.controls.cells.editors.base.OnPressedEditableTreeTableCell;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Control;
 import javafx.scene.control.TableCell;
@@ -48,6 +51,24 @@ public class CellFactory {
                 } else {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     return sdf.format(cell.getItem());
+                }
+            }, cell.emptyProperty(), cell.itemProperty()));
+            text.getStyleClass().add("text-center");
+            return cell ;
+        });
+    }
+
+    public void StringCenterValueFactory(JFXTreeTableColumn col){
+        col.setCellFactory(tc -> {
+            JFXTreeTableCell<?, ?> cell = new JFXTreeTableCell<>();
+            Text text = new Text();
+            cell.setGraphic(text);
+            text.wrappingWidthProperty().bind(col.widthProperty().multiply(0.9));
+            text.textProperty().bind(Bindings.createStringBinding(() -> {
+                if (cell.isEmpty()) {
+                    return null ;
+                } else {
+                    return String.valueOf(cell.getItem());
                 }
             }, cell.emptyProperty(), cell.itemProperty()));
             text.getStyleClass().add("text-center");

@@ -1,7 +1,10 @@
 package modules.dao;
 
 import controller.GlobalDataSession;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import modules.entities.PhieuMuon;
+import modules.entities.PhieuTra;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -15,7 +18,7 @@ public class PhieuMuonDAO extends AbstractDAO<PhieuMuon>{
 
     private Session session = GlobalDataSession.getSession();
 
-    private List<PhieuMuon> all = null;
+    private ObservableList<PhieuMuon> all = FXCollections.observableArrayList();
 
     public PhieuMuon getByID(Integer id){
         return all().parallelStream().filter(e->e.getId()==id).findAny().orElse(null);
@@ -26,9 +29,15 @@ public class PhieuMuonDAO extends AbstractDAO<PhieuMuon>{
         return instance;
     }
 
-    public List<PhieuMuon> all(){
-        if (all == null)
-        return instance.getAll();
-        else return all;
+    public ObservableList<PhieuMuon> all(){
+        if(all.isEmpty()){
+            all.addAll(instance.getAll());
+        }
+        return all;
+    }
+
+    public void reload(){
+        all.clear();
+        all.addAll(instance.getAll());
     }
 }

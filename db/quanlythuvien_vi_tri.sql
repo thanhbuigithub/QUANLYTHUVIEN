@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlythuvien
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,7 +37,7 @@ CREATE TABLE `vi_tri` (
 
 LOCK TABLES `vi_tri` WRITE;
 /*!40000 ALTER TABLE `vi_tri` DISABLE KEYS */;
-INSERT INTO `vi_tri` VALUES (1,'A','A1',1),(2,'A','A2',3),(3,'B','B1',4),(4,'C','C1',2),(5,'C','C3',4);
+INSERT INTO `vi_tri` VALUES (1,'A','A1',1),(2,'A','A2',3),(3,'B','B1',1),(4,'B','B2',2),(5,'C','C1',3);
 /*!40000 ALTER TABLE `vi_tri` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-06  9:17:49
+-- Dump completed on 2020-08-08 21:52:54

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlythuvien
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,18 +26,19 @@ CREATE TABLE `sach` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ten_sach` varchar(100) NOT NULL,
   `nam_xuat_ban` int NOT NULL,
-  `ma_nxb` int NOT NULL,
+  `nha_xuat_ban` varchar(100) NOT NULL,
+  `ngon_ngu` varchar(100) DEFAULT NULL,
+  `tac_gia` varchar(100) DEFAULT NULL,
+  `the_loai` varchar(100) DEFAULT NULL,
   `ma_vi_tri` int DEFAULT NULL,
-  `mo_ta` varchar(500) DEFAULT NULL,
   `gia_bia` int DEFAULT NULL,
   `so_luong` int DEFAULT NULL,
   `so_trang` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_nxb_sach_idx` (`ma_nxb`),
+  KEY `fk_nxb_sach_idx` (`nha_xuat_ban`),
   KEY `fk_vi_tri_sach_idx` (`ma_vi_tri`),
-  CONSTRAINT `fk_nxb_sach` FOREIGN KEY (`ma_nxb`) REFERENCES `nxb` (`id`),
   CONSTRAINT `fk_vi_tri_sach` FOREIGN KEY (`ma_vi_tri`) REFERENCES `vi_tri` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +47,7 @@ CREATE TABLE `sach` (
 
 LOCK TABLES `sach` WRITE;
 /*!40000 ALTER TABLE `sach` DISABLE KEYS */;
-INSERT INTO `sach` VALUES (1,'TRANH TRUYỆN DÂN GIAN VIỆT NAM - BÀ CHÚA TRẦM HƯƠNG',2016,1,1,NULL,14000,NULL,36),(2,'Đi Tìm Triết Lý Giáo Dục Việt Nam',2019,2,2,NULL,75000,NULL,284),(3,'Giáo Trình Phong Trào SAEMAUL Của Hàn Quốc',2020,3,3,NULL,150000,NULL,198),(4,'Phân Tích Thống Kê Và Khai Phá Dữ Liệu',2018,4,4,NULL,95000,NULL,352),(5,'Bộ Luật Dân Sự (Hiện Hành)',2019,5,5,NULL,113000,NULL,350);
+INSERT INTO `sach` VALUES (2,'TRANH TRUYỆN DÂN GIAN VIỆT NAM - BÀ CHÚA TRẦM HƯƠNG',2010,'Kim Đồng','Tiếng Việt','Nguyễn Nhật Ánh','Văn học nghệ thuật',1,100000,5,0),(3,'Bộ sách OpenMath',2014,'Giáo dục Việt Nam','Tiếng Việt','Nguyễn Phong Việt','Sách thiếu nhi',2,100000,4,0),(4,'Giáo trình Chế Biến Dầu Và Chất Béo',2014,'Đại học Quốc gia Thành phố Hồ Chí Minh','Tiếng Việt','Anh Khang','Khoa học công nghệ – Kinh tế',3,100000,6,0),(5,'Bản Sắc Việt Nam',2015,'Đại học Quốc gia Hà Nội','Tiếng Việt','Nguyễn Ngọc Thạch','Văn hóa xã hội – Lịch sử',4,148000,8,523),(6,'Bộ Luật Dân Sự (Hiện Hành)',2019,'Chính trị Quốc gia - Sự thật','Tiếng Việt','Nguyễn Ngọc Sơn','Chính trị – pháp luật',5,50000,7,350);
 /*!40000 ALTER TABLE `sach` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-06  9:17:50
+-- Dump completed on 2020-08-08 21:52:54

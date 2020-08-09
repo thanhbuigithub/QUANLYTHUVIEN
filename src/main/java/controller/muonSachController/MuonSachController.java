@@ -131,7 +131,7 @@ public class MuonSachController {
 
     public void setPredicateTable(JFXTextField tfSearch) {
         tfSearch.textProperty().addListener((o, oldVal, newVal) -> {
-            String newValueNoAccent = VNCharacterUtils.removeAccent(newVal);
+            String newValueNoAccent = VNCharacterUtils.removeAccent(newVal).toLowerCase();
             table.setPredicate(pmProperty -> {
                 PhieuMuon pm = pmProperty.getValue();
                 Sach sach = SachDAO.getInstance().getByID(pm.getIdSach());

@@ -66,4 +66,9 @@ public class ViTri {
     public int hashCode() {
         return Objects.hash(id, khu, ke, ngan);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Khu %s, K\u1EC7 %s, Ng\u0103n %d", khu,ke,ngan);
+    }
 }
