@@ -49,7 +49,7 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </JFXButton>
-        <JFXDatePicker fx:id="jfxDatePickerNgayTra" layoutX="337.0" layoutY="106.0" overLay="true"/>
+        <JFXDatePicker fx:id="jfxDatePickerNgayTra" layoutX="337.0" layoutY="106.0"/>
 
     </children>
 </AnchorPane>
