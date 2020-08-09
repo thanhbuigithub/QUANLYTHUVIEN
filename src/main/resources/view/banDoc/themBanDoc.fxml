@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="565.0" prefWidth="443.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.banDocController.themBanDoc.ThemBanDoc">
+    <children>
+        <JFXButton fx:id="btnThemBanDoc" layoutX="131.0" layoutY="484.0" onAction="#themBanDoc" prefHeight="39.0"
+                   prefWidth="177.0" text="Thêm bạn đọc" AnchorPane.bottomAnchor="42.0">
+            <font>
+                <Font name="Montserrat Medium" size="16.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </JFXButton>
+        <JFXTextField fx:id="tfTenBanDoc" labelFloat="true" layoutX="53.0" layoutY="29.0" prefHeight="30.0"
+                      prefWidth="330.0" promptText="Tên bạn đọc" AnchorPane.topAnchor="30.0"/>
+        <JFXTextField fx:id="tfCmnd" labelFloat="true" layoutX="54.0" layoutY="210.0" prefHeight="30.0"
+                      prefWidth="330.0" promptText="Số CMND" AnchorPane.topAnchor="210.0"/>
+        <JFXTextField fx:id="tfEmail" labelFloat="true" layoutX="54.0" layoutY="270.0" prefHeight="30.0"
+                      prefWidth="330.0" promptText="Email" AnchorPane.topAnchor="270.0"/>
+        <JFXTextField fx:id="tfSodt" labelFloat="true" layoutX="54.0" layoutY="330.0" prefHeight="30.0"
+                      prefWidth="330.0" promptText="Số điện thoại" AnchorPane.topAnchor="330.0"/>
+        <JFXDatePicker fx:id="jdpNgaySinh" layoutX="53.0" layoutY="91.0" prefHeight="31.0" prefWidth="330.0"
+                       promptText="Chọn Ngày Sinh"/>
+        <JFXComboBox fx:id="cbxGioiTinh" editable="true" labelFloat="true" layoutX="53.0" layoutY="151.0"
+                     prefHeight="31.0" prefWidth="330.0" promptText="Giới tính"/>
+        <JFXDatePicker fx:id="jdpThoiHan" layoutX="53.0" layoutY="393.0" prefHeight="31.0" prefWidth="330.0"
+                       promptText="Chọn thời hạn"/>
+
+    </children>
+</AnchorPane>

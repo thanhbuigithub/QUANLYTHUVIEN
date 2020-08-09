@@ -1,20 +1,25 @@
 package modules.entities;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "ban_doc", schema = "quanlythuvien")
-public class BanDoc {
+public class BanDoc extends RecursiveTreeObject<BanDoc> {
     private int id;
-    private String hoVaTen;
-    private Date ngaySinh;
-    private Integer gioiTinh;
-    private String cmnd;
-    private String email;
-    private String sdt;
-    private Date thoiHanSuDungThe;
+    public SimpleStringProperty hoVaTen = new SimpleStringProperty();
+    public ObjectProperty<Date> ngaySinh = new SimpleObjectProperty<>();
+    public ObjectProperty<Integer> gioiTinh = new SimpleObjectProperty<>();
+    public SimpleStringProperty cmnd = new SimpleStringProperty();
+    public SimpleStringProperty email = new SimpleStringProperty();
+    public SimpleStringProperty sdt = new SimpleStringProperty();
+    public ObjectProperty<Date> thoiHanSuDungThe = new SimpleObjectProperty<>();
 
     @Id
     @Column(name = "id")
@@ -29,71 +34,71 @@ public class BanDoc {
     @Basic
     @Column(name = "ho_va_ten")
     public String getHoVaTen() {
-        return hoVaTen;
+        return hoVaTen.get();
     }
 
     public void setHoVaTen(String hoVaTen) {
-        this.hoVaTen = hoVaTen;
+        this.hoVaTen.set(hoVaTen);
     }
 
     @Basic
     @Column(name = "ngay_sinh")
     public Date getNgaySinh() {
-        return ngaySinh;
+        return ngaySinh.get();
     }
 
     public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
+        this.ngaySinh.set(ngaySinh);
     }
 
     @Basic
     @Column(name = "gioi_tinh")
     public Integer getGioiTinh() {
-        return gioiTinh;
+        return gioiTinh.get();
     }
 
     public void setGioiTinh(Integer gioiTinh) {
-        this.gioiTinh = gioiTinh;
+        this.gioiTinh.set(gioiTinh);
     }
 
     @Basic
     @Column(name = "cmnd")
     public String getCmnd() {
-        return cmnd;
+        return cmnd.get();
     }
 
     public void setCmnd(String cmnd) {
-        this.cmnd = cmnd;
+        this.cmnd.set(cmnd);
     }
 
     @Basic
     @Column(name = "email")
     public String getEmail() {
-        return email;
+        return email.get();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email.set(email);
     }
 
     @Basic
     @Column(name = "sdt")
     public String getSdt() {
-        return sdt;
+        return sdt.get();
     }
 
     public void setSdt(String sdt) {
-        this.sdt = sdt;
+        this.sdt.set(sdt);
     }
 
     @Basic
     @Column(name = "thoi_han_su_dung_the")
     public Date getThoiHanSuDungThe() {
-        return thoiHanSuDungThe;
+        return thoiHanSuDungThe.get();
     }
 
     public void setThoiHanSuDungThe(Date thoiHanSuDungThe) {
-        this.thoiHanSuDungThe = thoiHanSuDungThe;
+        this.thoiHanSuDungThe.set(thoiHanSuDungThe);
     }
 
     @Override

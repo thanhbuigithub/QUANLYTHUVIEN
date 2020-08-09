@@ -186,7 +186,6 @@ public class QuanLySachController {
             String newValueNoAccent = VNCharacterUtils.removeAccent(newVal);
             table.setPredicate(sachProperty -> {
                 Sach sach = sachProperty.getValue();
-
                 return VNCharacterUtils.removeAccent(sach.getTenSach()).toLowerCase().contains(newValueNoAccent)
                         || String.valueOf(sach.getNamXuatBan()).contains(newValueNoAccent)
                         || VNCharacterUtils.removeAccent(sach.getNhaXuatBan()).toLowerCase().contains(newValueNoAccent)

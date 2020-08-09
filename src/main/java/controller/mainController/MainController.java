@@ -4,6 +4,7 @@ import animatefx.animation.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 import controller.Main;
+import controller.banDocController.BanDocController;
 import controller.muonSachController.MuonSachController;
 import controller.quanLySachController.QuanLySachController;
 import controller.traSachController.TraSachController;
@@ -91,6 +92,8 @@ public class MainController implements Initializable {
     private JFXButton nhapSach = new JFXButton("Nh\u1EADp s\u00E1ch");
     private JFXButton xuatSach = new JFXButton("Xu\u1EA5t s\u00E1ch");
 
+    private JFXButton taoBanDoc = new JFXButton("T\u1EA1o B\u1EA1n \u0110\u1ECDc");
+
     private final ObjectProperty<JFXButton> selectedBtn = new SimpleObjectProperty<>();
     private final ObservableList<JFXButton> btnCreateSelected = FXCollections.observableArrayList();
 
@@ -99,6 +102,7 @@ public class MainController implements Initializable {
     MuonSachController muonSachController;
     TraSachController traSachController;
     QuanLySachController quanLySachController;
+    BanDocController banDocController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,13 +139,14 @@ public class MainController implements Initializable {
 
         muonSachController = new MuonSachController(rootPane, mainPane);
         traSachController = new TraSachController(rootPane, mainPane);
-        quanLySachController = new QuanLySachController(rootPane,mainPane);
+        quanLySachController = new QuanLySachController(rootPane, mainPane);
+        banDocController = new BanDocController(rootPane, mainPane);
 
         tablePane.setCenter(muonSachController.getTable(tfSearch));
 
         taoPhieuMuon.setOnAction(e -> {
             try {
-                createStage("/view/phieuMuon/themPhieuMuon.fxml","T\u1EA1o phi\u1EBFu m\u01B0\u1EE3n", 560, 250);
+                createStage("/view/phieuMuon/themPhieuMuon.fxml", "T\u1EA1o phi\u1EBFu m\u01B0\u1EE3n", 560, 250);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -172,7 +177,7 @@ public class MainController implements Initializable {
         });
         taoSach.getStyleClass().add("add-button");
 
-        nhapSach.setOnAction(e->{
+        nhapSach.setOnAction(e -> {
             try {
                 nhapSach();
             } catch (IOException ioException) {
@@ -181,7 +186,7 @@ public class MainController implements Initializable {
         });
         nhapSach.getStyleClass().add("add-button");
 
-        xuatSach.setOnAction(e->{
+        xuatSach.setOnAction(e -> {
             try {
                 xuatSach();
             } catch (IOException ioException) {
@@ -190,6 +195,18 @@ public class MainController implements Initializable {
         });
         xuatSach.getStyleClass().add("add-button");
 
+        taoBanDoc.setOnAction(e -> {
+            try {
+                createStage("/view/banDoc/themBanDoc.fxml", "Th\u00EAm b\u1EA1n \u0111\u1ECDc", 443, 565);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        taoBanDoc.getStyleClass().add("add-button");
+        AnchorPane.setRightAnchor(taoBanDoc, (double) 10);
+        AnchorPane.setTopAnchor(taoBanDoc, (double) 15);
+        createBtnBox.getChildren().add(taoBanDoc);
+        btnCreateSelected.add(taoBanDoc);
     }
 
     @FXML
@@ -200,14 +217,13 @@ public class MainController implements Initializable {
         } else if (target == btnTraSach) {
             switchFunction(MAINCOLOR.TraSach, traSachController.getTable(tfSearch), Collections.singletonList(taoPhieuTra));
         } else if (target == btnQuanLySach) {
-            switchFunction(MAINCOLOR.QuanLySach, quanLySachController.getTable(tfSearch), Arrays.asList(xuatSach,nhapSach,taoSach));
+            switchFunction(MAINCOLOR.QuanLySach, quanLySachController.getTable(tfSearch), Arrays.asList(xuatSach, nhapSach, taoSach));
 
         } else if (target == btnTheThuVien) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.TheThuVien);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.TheThuVien);
         } else if (target == btnBanDoc) {
-            tablePane.setStyle("-fx-border-color: " + MAINCOLOR.BanDoc);
-            topPane.setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
+            switchFunction(MAINCOLOR.BanDoc, banDocController.getTable(tfSearch), Collections.singletonList(taoBanDoc));
         } else if (target == btnThongKe) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.ThongKe);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
