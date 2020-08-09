@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlythuvien
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,6 +30,7 @@ CREATE TABLE `ban_doc` (
   `cmnd` varchar(10) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `sdt` varchar(45) DEFAULT NULL,
+  `thoi_han_su_dung_the` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +41,7 @@ CREATE TABLE `ban_doc` (
 
 LOCK TABLES `ban_doc` WRITE;
 /*!40000 ALTER TABLE `ban_doc` DISABLE KEYS */;
-INSERT INTO `ban_doc` VALUES (1,'Nguyễn Hoàng Nam','1999-04-12',0,'215467745','hoangnam@gmail.com','0367127128'),(2,'Đinh Minh Nhựt','1989-11-12',0,'214263945','minhnhut@gmail.com','0235162789'),(3,'Hoàng Kim Ngân','1990-12-01',1,'231453623','kimngan@gmail.com','0123517283'),(4,'Vũ Minh Luân','1995-09-09',0,'312456324','minhluan@gmail.com','0127347284'),(5,'Nguyễn Thị Mai','1998-05-08',1,'312435345','thimai@gmail.com','0126346283');
+INSERT INTO `ban_doc` VALUES (1,'Nguyễn Hoàng Nam','1999-04-12',0,'215467745','hoangnam@gmail.com','0367127128','2021-08-08'),(2,'Đinh Minh Nhựt','1989-11-12',0,'214263945','minhnhut@gmail.com','0235162789','2021-08-08'),(3,'Hoàng Kim Ngân','1990-12-01',1,'231453623','kimngan@gmail.com','0123517283','2021-08-08'),(4,'Vũ Minh Luân','1995-09-09',0,'312456324','minhluan@gmail.com','0127347284','2021-08-08'),(5,'Nguyễn Thị Mai','1998-05-08',1,'312435345','thimai@gmail.com','0126346283','2021-08-08');
 /*!40000 ALTER TABLE `ban_doc` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-06  9:17:49
+-- Dump completed on 2020-08-08 21:52:54

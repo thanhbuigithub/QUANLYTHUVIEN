@@ -1,7 +1,10 @@
 package controller;
 
 import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
+import com.jfoenix.controls.cells.editors.base.OnPressedEditableTreeTableCell;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Control;
 import javafx.scene.control.TableCell;

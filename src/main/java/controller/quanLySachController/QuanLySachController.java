@@ -4,7 +4,10 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.controls.events.JFXDialogEvent;
 import controller.CellFactory;
+import controller.Main;
 import controller.VNCharacterUtils;
+import controller.mainController.MainController;
+import controller.quanLySachController.suaSach.SuaSachController;
 import controller.util.AlertMaker;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -12,15 +15,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modules.dao.*;
 import modules.entities.*;
 
+import java.io.IOException;
 import java.util.*;
 
 public class QuanLySachController {
@@ -37,13 +45,7 @@ public class QuanLySachController {
     private JFXTreeTableColumn<Sach, Integer> colSoLuong = new JFXTreeTableColumn<>("S\u1ED1 L\u01B0\u1EE3ng");
     private JFXTreeTableColumn<Sach, Integer> colSoTrang = new JFXTreeTableColumn<>("S\u1ED1 Trang");
 
-    private final String SEPARATOR = ", ";
-
-    ObservableList<Sach> listSach = FXCollections.observableArrayList();
-
     public QuanLySachController(StackPane rootPane, BorderPane mainPane) {
-        listSach.addAll(SachDAO.getInstance().all());
-
         colTenSach.setCellValueFactory((param) -> {
             if (colTenSach.validateValue(param)) {
                 Sach sach = param.getValue().getValue();
@@ -125,7 +127,7 @@ public class QuanLySachController {
         });
         CellFactory.getInstance().StringCenterValueFactory(colSoTrang);
 
-        final TreeItem<Sach> root = new RecursiveTreeItem<>(listSach, RecursiveTreeObject::getChildren);
+        final TreeItem<Sach> root = new RecursiveTreeItem<>(SachDAO.getInstance().all(), RecursiveTreeObject::getChildren);
 
         table.setRoot(root);
         table.setShowRoot(false);
@@ -137,35 +139,46 @@ public class QuanLySachController {
         table.setRowFactory(value -> new JFXTreeTableRow<>() {
             {
                 ContextMenu addMenu = new ContextMenu();
-                MenuItem itemGiaHan = new MenuItem("Gia h\u1EA1n");
+                MenuItem itemChinhSua = new MenuItem("Ch\u1EC9nh s\u1EEDa");
                 MenuItem itemXoa = new MenuItem("Xo\u00E1");
-                addMenu.getItems().addAll(itemGiaHan, itemXoa);
-//                itemGiaHan.setOnAction((e) -> {
-//                    JFXButton btnYES = new JFXButton("YES");
-//                    JFXButton btnNO = new JFXButton("NO");
-//                    btnYES.setOnAction(event -> {
-//                        PhieuMuon phieuMuon = getTreeTableView().getTreeItem(getIndex()).getValue();
-//                        phieuMuon.giaHan.set(phieuMuon.giaHan.get() + 1);
-//                        phieuMuon.thoiHanMuon.set(phieuMuon.thoiHanMuon.get() + 7);
-//                        PhieuMuonDAO.getInstance().update(phieuMuon);
-//                    });
-//                    AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n gia h\u1EA1n phi\u1EBFu m\u01B0\u1EE3n n\u00E0y trong 7 ng\u00E0y?");
-//                });
-//                itemXoa.setOnAction((e) -> {
-//                    ObjectProperty<JFXDialog> dialogProperty = new SimpleObjectProperty<>();
-//                    JFXButton btnYES = new JFXButton("YES");
-//                    JFXButton btnNO = new JFXButton("NO");
-//                    btnYES.setOnAction(event -> {
-//                        PhieuMuon phieuMuon = getTreeTableView().getTreeItem(getIndex()).getValue();
-//                        if (PhieuMuonDAO.getInstance().remove(phieuMuon)) {
-//                            getTreeTableView().getRoot().getChildren().remove(getIndex());
-//                        }
-//                    });
-//                    AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Xo\u00E1 phi\u1EBFu m\u01B0\u1EE3n", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n xo\u00E1 phi\u1EBFu m\u01B0\u1EE3n n\u00E0y?");
-//                });
+                addMenu.getItems().addAll(itemChinhSua, itemXoa);
+                itemChinhSua.setOnAction((e) -> {
+                    Sach sach = getTreeTableView().getTreeItem(getIndex()).getValue();
+                    try {
+                        showChinhSuaDialog(sach);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                });
+                itemXoa.setOnAction((e) -> {
+                    ObjectProperty<JFXDialog> dialogProperty = new SimpleObjectProperty<>();
+                    JFXButton btnYES = new JFXButton("YES");
+                    JFXButton btnNO = new JFXButton("NO");
+                    btnYES.setOnAction(event -> {
+                        Sach sach = getTreeTableView().getTreeItem(getIndex()).getValue();
+                        if (SachDAO.getInstance().remove(sach)) {
+                            getTreeTableView().getRoot().getChildren().remove(getIndex());
+                        }
+                    });
+                    AlertMaker.showMaterialDialog(rootPane, mainPane, Arrays.asList(btnNO, btnYES), "Xo\u00E1 phi\u1EBFu m\u01B0\u1EE3n", "B\u1EA1n c\u00F3 ch\u1EAFc mu\u1ED1n xo\u00E1 phi\u1EBFu m\u01B0\u1EE3n n\u00E0y?");
+                });
                 this.setContextMenu(addMenu);
             }
         });
+    }
+
+    private void showChinhSuaDialog(Sach sach) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/view/quanLySach/suaSach.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Ch\u1EC9nh s\u1EEDa s\u00E1ch");
+        JFXDecorator decorator = new JFXDecorator(stage, loader.load());
+        Scene scene = new Scene(decorator, 443, 720);
+        stage.setScene(scene);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(Main.stage);
+        SuaSachController controller = loader.getController();
+        controller.bindingData(sach);
+        stage.showAndWait();
     }
 
     public void setPredicateTable(JFXTextField tfSearch) {
@@ -174,9 +187,9 @@ public class QuanLySachController {
             table.setPredicate(sachProperty -> {
                 Sach sach = sachProperty.getValue();
 
-                return VNCharacterUtils.removeAccent(sach.getTenSach()).contains(newValueNoAccent)
+                return VNCharacterUtils.removeAccent(sach.getTenSach()).toLowerCase().contains(newValueNoAccent)
                         || String.valueOf(sach.getNamXuatBan()).contains(newValueNoAccent)
-                        || VNCharacterUtils.removeAccent(sach.getNhaXuatBan()).contains(newValueNoAccent)
+                        || VNCharacterUtils.removeAccent(sach.getNhaXuatBan()).toLowerCase().contains(newValueNoAccent)
                         || VNCharacterUtils.removeAccent(sach.getNgonNgu()).toLowerCase().contains(newValueNoAccent)
                         || VNCharacterUtils.removeAccent(sach.getTacGia()).toLowerCase().contains(newValueNoAccent)
                         || VNCharacterUtils.removeAccent(sach.getTheLoai()).toLowerCase().contains(newValueNoAccent);

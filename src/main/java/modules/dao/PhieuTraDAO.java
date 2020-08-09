@@ -1,7 +1,10 @@
 package modules.dao;
 
 import controller.GlobalDataSession;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import modules.entities.PhieuTra;
+import modules.entities.Sach;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -14,7 +17,7 @@ public class PhieuTraDAO extends AbstractDAO<PhieuTra> {
     private static final PhieuTraDAO instance = new PhieuTraDAO();
     private Session session = GlobalDataSession.getSession();
 
-    private List<PhieuTra> all = null;
+    private ObservableList<PhieuTra> all = FXCollections.observableArrayList();
 
     public PhieuTra getByID(Integer id) {
         return all().parallelStream().filter(e -> e.getId() == id).findAny().orElse(null);
@@ -25,9 +28,16 @@ public class PhieuTraDAO extends AbstractDAO<PhieuTra> {
         return instance;
     }
 
-    public List<PhieuTra> all() {
-        if (all == null)
-            return instance.getAll();
-        else return all;
+
+    public ObservableList<PhieuTra> all(){
+        if(all.isEmpty()){
+            all.addAll(instance.getAll());
+        }
+        return all;
+    }
+
+    public void reload(){
+        all.clear();
+        all.addAll(instance.getAll());
     }
 }

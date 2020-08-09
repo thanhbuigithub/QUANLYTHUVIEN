@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlythuvien
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `sach_tac_gia`
+-- Table structure for table `lich_su_dang_nhap`
 --
 
-DROP TABLE IF EXISTS `sach_tac_gia`;
+DROP TABLE IF EXISTS `lich_su_dang_nhap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sach_tac_gia` (
-  `id_sach` int NOT NULL,
-  `id_tac_gia` int NOT NULL,
-  PRIMARY KEY (`id_sach`,`id_tac_gia`),
-  KEY `fk_id_tac_gia_sach_tac_gia_idx` (`id_tac_gia`),
-  CONSTRAINT `fk_id_sach_sach_tac_gia` FOREIGN KEY (`id_sach`) REFERENCES `sach` (`id`),
-  CONSTRAINT `fk_id_tac_gia_sach_tac_gia` FOREIGN KEY (`id_tac_gia`) REFERENCES `tac_gia` (`id`)
+CREATE TABLE `lich_su_dang_nhap` (
+  `id` int NOT NULL,
+  `id_nhan_vien` int DEFAULT NULL,
+  `thoi_gian_dang_nhap` datetime DEFAULT NULL,
+  `thoi_gian_dang_xuat` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_id_nhan_vien_lich_su_dang_nhap_idx` (`id_nhan_vien`),
+  CONSTRAINT `fk_id_nhan_vien_lich_su_dang_nhap` FOREIGN KEY (`id_nhan_vien`) REFERENCES `nhan_vien` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `sach_tac_gia`
+-- Dumping data for table `lich_su_dang_nhap`
 --
 
-LOCK TABLES `sach_tac_gia` WRITE;
-/*!40000 ALTER TABLE `sach_tac_gia` DISABLE KEYS */;
-INSERT INTO `sach_tac_gia` VALUES (1,1),(2,2),(3,3),(4,4),(5,5);
-/*!40000 ALTER TABLE `sach_tac_gia` ENABLE KEYS */;
+LOCK TABLES `lich_su_dang_nhap` WRITE;
+/*!40000 ALTER TABLE `lich_su_dang_nhap` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lich_su_dang_nhap` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-06  9:17:49
+-- Dump completed on 2020-08-08 21:52:55

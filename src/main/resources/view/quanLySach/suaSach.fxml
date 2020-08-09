@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="691.0" prefWidth="443.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.quanLySachController.suaSach.SuaSachController">
+    <children>
+        <JFXButton fx:id="btnCapNhat" layoutX="261.0" layoutY="631.0" onAction="#capNhat" prefHeight="39.0" prefWidth="124.0" text="Cập nhật" AnchorPane.bottomAnchor="20.0">
+            <font>
+                <Font name="Montserrat Medium" size="16.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXTextField fx:id="tfTenSach" labelFloat="true" layoutX="53.0" layoutY="29.0" prefHeight="30.0" prefWidth="330.0" promptText="Tên sách" AnchorPane.topAnchor="30.0" />
+        <JFXTextField fx:id="tfNamXuatBan" labelFloat="true" layoutX="54.0" layoutY="89.0" prefHeight="30.0" prefWidth="330.0" promptText="Năm xuất bản" AnchorPane.topAnchor="90.0" />
+        <JFXTextField fx:id="tfNgonNgu" labelFloat="true" layoutX="54.0" layoutY="210.0" prefHeight="30.0" prefWidth="330.0" promptText="Ngôn ngữ" AnchorPane.topAnchor="210.0" />
+        <JFXTextField fx:id="tfTacGia" labelFloat="true" layoutX="54.0" layoutY="270.0" prefHeight="30.0" prefWidth="330.0" promptText="Tác giả" AnchorPane.topAnchor="270.0" />
+        <JFXTextField fx:id="tfTheLoai" labelFloat="true" layoutX="54.0" layoutY="330.0" prefHeight="30.0" prefWidth="330.0" promptText="Thể loại" AnchorPane.topAnchor="330.0" />
+        <JFXTextField fx:id="tfGiaBia" labelFloat="true" layoutX="54.0" layoutY="450.0" prefHeight="30.0" prefWidth="330.0" promptText="Giá bìa" AnchorPane.topAnchor="450.0" />
+        <JFXTextField fx:id="tfSoLuong" labelFloat="true" layoutX="54.0" layoutY="510.0" prefHeight="30.0" prefWidth="330.0" promptText="Số lượng" AnchorPane.topAnchor="510.0" />
+        <JFXTextField fx:id="tfSoTrang" labelFloat="true" layoutX="54.0" layoutY="570.0" prefHeight="30.0" prefWidth="330.0" promptText="Số trang" AnchorPane.topAnchor="570.0" />
+        <JFXComboBox fx:id="cbxMaViTri" editable="true" labelFloat="true" layoutX="55.0" layoutY="390.0" prefHeight="31.0" prefWidth="330.0" promptText="Mã vị trí" AnchorPane.topAnchor="390.0" />
+        <JFXTextField fx:id="tfNhaXuatBan" labelFloat="true" layoutX="54.0" layoutY="147.0" prefHeight="30.0" prefWidth="330.0" promptText="Nhà xuất bản" AnchorPane.topAnchor="150.0" />
+      <JFXButton fx:id="btnHuy" layoutX="129.0" layoutY="631.0" onAction="#huy" prefHeight="39.0" prefWidth="124.0" text="Huỷ" AnchorPane.bottomAnchor="20.0">
+         <font>
+            <Font name="Montserrat Medium" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+
+    </children>
+</AnchorPane>

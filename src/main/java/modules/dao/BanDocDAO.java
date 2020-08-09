@@ -1,7 +1,10 @@
 package modules.dao;
 
 import controller.GlobalDataSession;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import modules.entities.BanDoc;
+import modules.entities.PhieuTra;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -15,7 +18,7 @@ public class BanDocDAO extends AbstractDAO<BanDoc>{
 
     private Session session = GlobalDataSession.getSession();
 
-    private List<BanDoc> all = null;
+    private ObservableList<BanDoc> all = FXCollections.observableArrayList();
 
     public BanDoc getByID(Integer id){
         return all().parallelStream().filter(e->e.getId()==id).findAny().orElse(null);
@@ -26,9 +29,15 @@ public class BanDocDAO extends AbstractDAO<BanDoc>{
         return instance;
     }
 
-    public List<BanDoc> all(){
-        if(all==null)
-            return instance.getAll();
-        else return all;
+    public ObservableList<BanDoc> all(){
+        if(all.isEmpty()){
+            all.addAll(instance.getAll());
+        }
+        return all;
+    }
+
+    public void reload(){
+        all.clear();
+        all.addAll(instance.getAll());
     }
 }

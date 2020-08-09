@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController.MainController">
    <stylesheets>
       <URL value="@style.css" />
@@ -95,11 +94,12 @@
                               <AnchorPane fx:id="topPane" prefHeight="75.0" prefWidth="658.0" style="-fx-background-color: #1abc9c;" BorderPane.alignment="CENTER">
                                  <children>
                                     <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" layoutX="40.0" layoutY="51.0" size="30" />
-                                    <JFXTextField fx:id="tfSearch" focusColor="WHITE" layoutX="102.0" layoutY="12.0" prefHeight="54.0" prefWidth="283.0" promptText="Tìm kiếm" style="-fx-text-inner-color: white; -fx-prompt-text-fill: lightgray;" unFocusColor="#00a148" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="300.0">
+                                    <JFXTextField fx:id="tfSearch" focusColor="WHITE" layoutX="102.0" layoutY="12.0" prefHeight="54.0" prefWidth="283.0" promptText="Tìm kiếm" style="-fx-text-inner-color: white; -fx-prompt-text-fill: lightgray;" unFocusColor="#00a148" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="500.0">
                                        <font>
                                           <Font name="Montserrat SemiBold" size="18.0" />
                                        </font>
                                     </JFXTextField>
+                                    <HBox fx:id="createBtnBox" alignment="CENTER_RIGHT" layoutX="476.0" layoutY="11.0" prefHeight="54.0" prefWidth="400.0" spacing="20.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </top>

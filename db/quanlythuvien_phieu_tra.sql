@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: quanlythuvien
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,7 +40,7 @@ CREATE TABLE `phieu_tra` (
 
 LOCK TABLES `phieu_tra` WRITE;
 /*!40000 ALTER TABLE `phieu_tra` DISABLE KEYS */;
-INSERT INTO `phieu_tra` VALUES (1,NULL,'2020-09-09','Bình thường','Không'),(2,NULL,'2020-08-22','Bình thường','Không'),(3,NULL,'2020-10-01','Bình thường','Không'),(4,NULL,'2020-08-15','Bình thường','Không'),(5,NULL,'2020-09-28','Hư Hỏng','Có');
+INSERT INTO `phieu_tra` VALUES (1,5,'2020-09-09','Bình thường',NULL),(2,6,'2020-08-22','Bình thường',NULL),(3,7,'2020-10-01','Bình thường',NULL),(4,8,'2020-08-15','Bình thường',NULL),(5,9,'2020-09-28','Hư Hỏng','Có');
 /*!40000 ALTER TABLE `phieu_tra` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-06  9:17:50
+-- Dump completed on 2020-08-08 21:52:54
