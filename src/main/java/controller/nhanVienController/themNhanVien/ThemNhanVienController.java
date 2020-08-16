@@ -68,6 +68,7 @@ public class ThemNhanVienController implements Initializable {
         notNullValidatorPassWord(tfConfirmPassword);
 
         numberOnlyTextField(tfCmnd);
+        numberOnlyTextField(tfSodt);
     }
 
     @FXML

@@ -68,12 +68,14 @@ public class SuaBanDocController implements Initializable {
         notNullValidator(tfSodt);
 
         numberOnlyTextField(tfCmnd);
+        numberOnlyTextField(tfSodt);
     }
 
     @FXML
     void capNhat(ActionEvent event) {
         if (isValidateAll()) {
             BanDocDAO.getInstance().update(updateBanDoc(localBanDoc));
+            BanDocDAO.getInstance().reload();
             Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             primaryStage.close();
         }

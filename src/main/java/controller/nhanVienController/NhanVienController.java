@@ -37,6 +37,8 @@ public class NhanVienController {
     private JFXTreeTableColumn<NhanVien, String> colCmnd = new JFXTreeTableColumn<>("S\u1ED1 CMND");
     private JFXTreeTableColumn<NhanVien, String> colEmail = new JFXTreeTableColumn<>("Email");
     private JFXTreeTableColumn<NhanVien, String> colSdt = new JFXTreeTableColumn<>("S\u1ED1 \u0111i\u1EC7n tho\u1EA1i");
+    private JFXTreeTableColumn<NhanVien, String> colUserName = new JFXTreeTableColumn<>("UserName");
+    private JFXTreeTableColumn<NhanVien, String> colPassWord = new JFXTreeTableColumn<>("M\u1EADt kh\u1EA9u");
     private JFXTreeTableColumn<NhanVien, String> colChucDanh = new JFXTreeTableColumn<>("Ch\u1EE9c danh");
 
     public NhanVienController(StackPane rootPane, BorderPane mainPane) {
@@ -91,6 +93,22 @@ public class NhanVienController {
         });
         CellFactory.getInstance().StringCenterValueFactory(colSdt);
 
+        colUserName.setCellValueFactory((param) -> {
+            if (colUserName.validateValue(param)) {
+                NhanVien NhanVien = param.getValue().getValue();
+                return new SimpleStringProperty(NhanVien.getUsername());
+            } else return colUserName.getComputedValue(param);
+        });
+        CellFactory.getInstance().StringCenterValueFactory(colUserName);
+
+        colPassWord.setCellValueFactory((param) -> {
+            if (colPassWord.validateValue(param)) {
+                NhanVien NhanVien = param.getValue().getValue();
+                return new SimpleStringProperty(NhanVien.getPassword());
+            } else return colPassWord.getComputedValue(param);
+        });
+        CellFactory.getInstance().StringCenterValueFactory(colPassWord);
+
         colChucDanh.setCellValueFactory((param) -> {
             if (colChucDanh.validateValue(param)) {
                 NhanVien NhanVien = param.getValue().getValue();
@@ -109,7 +127,7 @@ public class NhanVienController {
         table.setRoot(root);
         table.setShowRoot(false);
         table.setEditable(true);
-        table.getColumns().setAll(colTenNhanVien, colNgaySinh, colGioiTinh, colCmnd, colEmail, colSdt, colChucDanh);
+        table.getColumns().setAll(colTenNhanVien, colNgaySinh, colGioiTinh, colCmnd, colEmail, colSdt, colUserName, colPassWord, colChucDanh);
         table.setColumnResizePolicy(TreeTableView.CONSTRAINED_RESIZE_POLICY);
 
         table.setRowFactory(value -> new JFXTreeTableRow<>() {
@@ -148,7 +166,7 @@ public class NhanVienController {
         Stage stage = new Stage();
         stage.setTitle("Ch\u1EC9nh s\u1EEDa Nh\u00E2n vi\u00EAn");
         JFXDecorator decorator = new JFXDecorator(stage, loader.load());
-        Scene scene = new Scene(decorator, 478, 530);
+        Scene scene = new Scene(decorator, 480, 670);
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(Main.stage);

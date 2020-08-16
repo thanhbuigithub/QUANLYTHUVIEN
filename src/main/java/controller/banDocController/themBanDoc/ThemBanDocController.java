@@ -57,6 +57,7 @@ public class ThemBanDocController implements Initializable {
         notNullValidator(tfSodt);
 
         numberOnlyTextField(tfCmnd);
+        numberOnlyTextField(tfSodt);
     }
 
     @FXML

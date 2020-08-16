@@ -1,9 +1,6 @@
 package controller.nhanVienController.suaNhanVien;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +44,12 @@ public class SuaNhanVienController implements Initializable {
     private JFXTextField tfSodt;
 
     @FXML
+    private JFXTextField tfUsername;
+
+    @FXML
+    private JFXPasswordField tfPassword;
+
+    @FXML
     private JFXComboBox<String> cbxChucVu;
 
     NhanVien localNhanVien = null;
@@ -60,14 +63,18 @@ public class SuaNhanVienController implements Initializable {
         notNullValidator(tfCmnd);
         notNullValidator(tfEmail);
         notNullValidator(tfSodt);
+        notNullValidator(tfUsername);
+        notNullValidatorPassWord(tfPassword);
 
         numberOnlyTextField(tfCmnd);
+        numberOnlyTextField(tfSodt);
     }
 
     @FXML
     void capNhat(ActionEvent event) {
         if (isValidateAll()) {
-            NhanVienDAO.getInstance().update(updateBanDoc(localNhanVien));
+            NhanVienDAO.getInstance().update(updateNhanVien(localNhanVien));
+            NhanVienDAO.getInstance().reload();
             Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             primaryStage.close();
         }
@@ -94,6 +101,8 @@ public class SuaNhanVienController implements Initializable {
         tfCmnd.setText(nhanVien.getCmnd());
         tfEmail.setText(nhanVien.getEmail());
         tfSodt.setText(nhanVien.getSdt());
+        tfUsername.setText(nhanVien.getUsername());
+        tfPassword.setText(nhanVien.getPassword());
         ObservableList<String> chucVu = FXCollections.observableArrayList("Nh\u00E2n vi\u00EAn", "Admin", "Th\u1EE7 th\u01B0");
         cbxChucVu.setItems(chucVu);
         if (localNhanVien.getChucDanh() == 0) {
@@ -104,6 +113,17 @@ public class SuaNhanVienController implements Initializable {
     }
 
     private void notNullValidator(JFXTextField tf) {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        tf.getValidators().add(validator);
+        validator.setMessage("Kh\u00F4ng \u0111\u01B0\u1EE3c b\u1ECF tr\u1ED1ng");
+        tf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                validator.validate();
+            }
+        });
+    }
+
+    private void notNullValidatorPassWord(JFXPasswordField tf) {
         RequiredFieldValidator validator = new RequiredFieldValidator();
         tf.getValidators().add(validator);
         validator.setMessage("Kh\u00F4ng \u0111\u01B0\u1EE3c b\u1ECF tr\u1ED1ng");
@@ -128,10 +148,11 @@ public class SuaNhanVienController implements Initializable {
         return tfTenNhanVien.validate() &&
                 tfCmnd.validate() &&
                 tfEmail.validate() &&
-                tfSodt.validate() && jdpNgaySinh.validate() && cbxGioiTinh.validate() && cbxChucVu.validate();
+                tfSodt.validate() && jdpNgaySinh.validate() && cbxGioiTinh.validate()
+                && cbxChucVu.validate() && tfUsername.validate() && tfPassword.validate();
     }
 
-    private NhanVien updateBanDoc(NhanVien nhanVien) {
+    private NhanVien updateNhanVien(NhanVien nhanVien) {
         nhanVien.setHoVaTen(tfTenNhanVien.getText());
         nhanVien.setNgaySinh(Date.from(jdpNgaySinh.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         if (cbxGioiTinh.getValue().toLowerCase().equals("nam")) {
@@ -142,6 +163,8 @@ public class SuaNhanVienController implements Initializable {
         nhanVien.setCmnd(tfCmnd.getText());
         nhanVien.setEmail(tfEmail.getText());
         nhanVien.setSdt(tfSodt.getText());
+        nhanVien.setUsername(tfUsername.getText());
+        nhanVien.setPassword(tfPassword.getText());
         if (cbxChucVu.getValue().toLowerCase().equals("nh\u00E2n vi\u00EAn")) {
             nhanVien.setChucDanh(0);
         } else if (cbxChucVu.getValue().toLowerCase().equals("admin")) {
