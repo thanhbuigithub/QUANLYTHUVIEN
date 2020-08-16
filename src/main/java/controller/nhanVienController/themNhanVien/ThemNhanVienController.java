@@ -1,4 +1,4 @@
-package controller.banDocController.suaBanDoc;
+package controller.nhanVienController.themNhanVien;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -12,13 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import modules.dao.BanDocDAO;
-import modules.dao.SachDAO;
-import modules.dao.ViTriDAO;
+import modules.dao.NhanVienDAO;
 import modules.entities.BanDoc;
-import modules.entities.Sach;
-import modules.entities.ViTri;
+import modules.entities.NhanVien;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -27,15 +24,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class SuaBanDocController implements Initializable {
+public class ThemNhanVienController implements Initializable {
     @FXML
-    private JFXButton btnCapNhat;
+    private JFXButton btnThemNhanVien;
 
     @FXML
-    private JFXButton btnHuy;
-
-    @FXML
-    private JFXTextField tfTenBanDoc;
+    private JFXTextField tfTenNhanVien;
 
     @FXML
     private JFXDatePicker jdpNgaySinh;
@@ -53,16 +47,13 @@ public class SuaBanDocController implements Initializable {
     private JFXTextField tfSodt;
 
     @FXML
-    private JFXDatePicker jdpThoiHan;
-
-    BanDoc localBanDoc = null;
+    private JFXComboBox<String> cbxChucVu;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        btnCapNhat.getStyleClass().add("dialog-button");
-        btnHuy.getStyleClass().add("dialog-button");
-
-        notNullValidator(tfTenBanDoc);
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        btnThemNhanVien.getStyleClass().add("dialog-button");
+        bindingData();
+        notNullValidator(tfTenNhanVien);
         notNullValidator(tfCmnd);
         notNullValidator(tfEmail);
         notNullValidator(tfSodt);
@@ -71,36 +62,26 @@ public class SuaBanDocController implements Initializable {
     }
 
     @FXML
-    void capNhat(ActionEvent event) {
+    void themNhanVien(ActionEvent event) {
         if (isValidateAll()) {
-            BanDocDAO.getInstance().update(updateBanDoc(localBanDoc));
+            NhanVienDAO.getInstance().insert(getNhanVien());
+            NhanVienDAO.getInstance().reload();
             Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             primaryStage.close();
         }
     }
 
-    @FXML
-    void huy(ActionEvent event) {
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        primaryStage.close();
-    }
-
-    public void bindingData(BanDoc banDoc) {
-        localBanDoc = banDoc;
-        LocalDate localDate = banDoc.getNgaySinh().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        ObservableList<String> data = FXCollections.observableArrayList("Nam", "N\u1EEF");
-        cbxGioiTinh.setItems(data);
-        tfTenBanDoc.setText(banDoc.getHoVaTen());
+    public void bindingData() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String date = "01/01/2000";
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        ObservableList<String> gioiTinh = FXCollections.observableArrayList("Nam", "N\u1EEF");
+        ObservableList<String> chucVu = FXCollections.observableArrayList("Nh\u00E2n vi\u00EAn", "Admin", "Th\u1EE7 th\u01B0");
+        cbxGioiTinh.setItems(gioiTinh);
+        cbxChucVu.setItems(chucVu);
         jdpNgaySinh.setValue(localDate);
-        if (localBanDoc.getGioiTinh() == 0) {
-            cbxGioiTinh.setValue("Nam");
-        } else {
-            cbxGioiTinh.setValue("N\u1EEF");
-        }
-        tfCmnd.setText(banDoc.getCmnd());
-        tfEmail.setText(banDoc.getEmail());
-        tfSodt.setText(banDoc.getSdt());
-        jdpThoiHan.setValue(LocalDate.now());
+        cbxGioiTinh.setValue("Nam");
+        cbxChucVu.setValue("Nh\u00E2n vi\u00EAn");
     }
 
     private void notNullValidator(JFXTextField tf) {
@@ -125,24 +106,29 @@ public class SuaBanDocController implements Initializable {
     }
 
     private boolean isValidateAll() {
-        return tfTenBanDoc.validate() &&
+        return tfTenNhanVien.validate() &&
                 tfCmnd.validate() &&
                 tfEmail.validate() &&
-                tfSodt.validate() && jdpNgaySinh.validate() && jdpThoiHan.validate() && cbxGioiTinh.validate();
+                tfSodt.validate() && jdpNgaySinh.validate() && cbxGioiTinh.validate() && cbxChucVu.validate();
     }
 
-    private BanDoc updateBanDoc(BanDoc bandoc) {
-        bandoc.setHoVaTen(tfTenBanDoc.getText());
-        bandoc.setNgaySinh(Date.from(jdpNgaySinh.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    private NhanVien getNhanVien() {
+        NhanVien nhanVien = new NhanVien();
+        nhanVien.setHoVaTen(tfTenNhanVien.getText());
+        nhanVien.setNgaySinh(Date.from(jdpNgaySinh.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         if (cbxGioiTinh.getValue().toLowerCase().equals("nam")) {
-            bandoc.setGioiTinh(0);
-        } else {
-            bandoc.setGioiTinh(1);
+            nhanVien.setGioiTinh(0);
+        } else if (cbxGioiTinh.getValue().toLowerCase().equals("n\u1EEF")) {
+            nhanVien.setGioiTinh(1);
         }
-        bandoc.setCmnd(tfCmnd.getText());
-        bandoc.setEmail(tfEmail.getText());
-        bandoc.setSdt(tfSodt.getText());
-        bandoc.setThoiHanSuDungThe(Date.from(jdpThoiHan.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        return bandoc;
+        nhanVien.setCmnd(tfCmnd.getText());
+        nhanVien.setEmail(tfEmail.getText());
+        nhanVien.setSdt(tfSodt.getText());
+        if (cbxChucVu.getValue().toLowerCase().equals("nh\u00E2n vi\u00EAn")) {
+            nhanVien.setChucDanh(0);
+        } else if (cbxChucVu.getValue().toLowerCase().equals("admin")) {
+            nhanVien.setChucDanh(1);
+        } else nhanVien.setChucDanh(2);
+        return nhanVien;
     }
 }

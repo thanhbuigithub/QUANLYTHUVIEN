@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="762.0" prefWidth="443.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+<AnchorPane prefHeight="593.0" prefWidth="443.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.banDocController.themBanDoc.ThemBanDocController">
+            fx:controller="controller.nhanVienController.themNhanVien.ThemNhanVienController">
     <children>
-        <JFXButton fx:id="btnThemBanDoc" layoutX="133.0" layoutY="528.0" onAction="#themBanDoc" prefHeight="41.0"
+        <JFXButton fx:id="btnThemNhanVien" layoutX="133.0" layoutY="528.0" onAction="#themNhanVien" prefHeight="41.0"
                    prefWidth="178.0" text="Thêm bạn đọc" AnchorPane.bottomAnchor="9.0">
             <font>
                 <Font name="Montserrat Medium" size="16.0"/>
@@ -19,8 +19,8 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </JFXButton>
-        <JFXTextField fx:id="tfTenBanDoc" labelFloat="true" layoutX="64.0" layoutY="23.0" prefHeight="30.0"
-                      prefWidth="330.0" promptText="Tên bạn đọc" AnchorPane.topAnchor="23.0"/>
+        <JFXTextField fx:id="tfTenNhanVien" labelFloat="true" layoutX="64.0" layoutY="23.0" prefHeight="30.0"
+                      prefWidth="330.0" promptText="Tên nhân viên" AnchorPane.topAnchor="23.0"/>
         <JFXTextField fx:id="tfCmnd" labelFloat="true" layoutX="65.0" layoutY="240.0" prefHeight="30.0"
                       prefWidth="330.0" promptText="Số CMND" AnchorPane.topAnchor="240.0"/>
         <JFXTextField fx:id="tfEmail" labelFloat="true" layoutX="65.0" layoutY="304.0" prefHeight="30.0"
@@ -30,24 +30,19 @@
         <JFXDatePicker fx:id="jdpNgaySinh" layoutX="64.0" layoutY="110.0" prefHeight="31.0" prefWidth="330.0"/>
         <JFXComboBox fx:id="cbxGioiTinh" editable="true" labelFloat="true" layoutX="65.0" layoutY="175.0"
                      prefHeight="31.0" prefWidth="330.0" promptText="Giới tính"/>
-        <JFXDatePicker fx:id="jdpThoiHan" layoutX="64.0" layoutY="665.0" prefHeight="31.0" prefWidth="330.0"/>
         <Label layoutX="64.0" layoutY="76.0" prefHeight="21.0" prefWidth="130.0" text="Chọn Ngày Sinh"
                textOverrun="CLIP">
             <font>
                 <Font name="System Bold" size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="65.0" layoutY="640.0" prefHeight="25.0" prefWidth="157.0" text="Chọn thời hạn mượn">
+        <Label layoutX="64.0" layoutY="431.0" prefHeight="25.0" prefWidth="157.0" text="Chọn quyền hạn">
             <font>
                 <Font name="System Bold" size="14.0"/>
             </font>
         </Label>
-        <JFXTextField fx:id="tfUsername" labelFloat="true" layoutX="65.0" layoutY="443.0" prefHeight="30.0"
-                      prefWidth="330.0" promptText="Username"/>
-        <JFXPasswordField fx:id="pwMatKhau" layoutX="65.0" layoutY="514.0" prefHeight="31.0" prefWidth="330.0"
-                          promptText="Mật khảu"/>
-        <JFXPasswordField fx:id="pwNhapLaiMk" layoutX="65.0" layoutY="579.0" prefHeight="31.0" prefWidth="330.0"
-                          promptText="Nhập lại mật khảu"/>
+        <JFXComboBox fx:id="cbxChucVu" editable="true" labelFloat="true" layoutX="65.0" layoutY="483.0"
+                     prefHeight="31.0" prefWidth="330.0" promptText="Chức vụ"/>
 
     </children>
 </AnchorPane>

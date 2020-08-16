@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import modules.dao.BanDocDAO;
-import modules.dao.SachDAO;
 import modules.entities.BanDoc;
 
 import java.net.URL;
@@ -23,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ThemBanDoc implements Initializable {
+public class ThemBanDocController implements Initializable {
     @FXML
     private JFXButton btnThemBanDoc;
 
@@ -106,7 +105,7 @@ public class ThemBanDoc implements Initializable {
         return tfTenBanDoc.validate() &&
                 tfCmnd.validate() &&
                 tfEmail.validate() &&
-                tfSodt.validate() && jdpNgaySinh.validate() && jdpThoiHan.validate();
+                tfSodt.validate() && jdpNgaySinh.validate() && jdpThoiHan.validate() && cbxGioiTinh.validate();
     }
 
     private BanDoc getBanDoc() {

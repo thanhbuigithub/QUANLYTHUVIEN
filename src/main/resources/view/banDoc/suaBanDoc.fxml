@@ -6,60 +6,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="336.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.banDocController.suaBanDoc.SuaBanDocController">
-    <JFXButton fx:id="btnCapNhat" layoutX="256.0" layoutY="377.0" onAction="#capNhat" prefHeight="39.0"
-               prefWidth="124.0" text="Cập nhật" AnchorPane.bottomAnchor="20.999999999999986"
-               AnchorPane.topAnchor="377.0">
+<AnchorPane prefHeight="529.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.banDocController.suaBanDoc.SuaBanDocController">
+    <JFXButton fx:id="btnCapNhat" layoutX="321.0" layoutY="466.0" onAction="#capNhat" prefHeight="39.0" prefWidth="124.0" text="Cập nhật" AnchorPane.bottomAnchor="58.80000000000001" AnchorPane.topAnchor="464.0">
         <font>
-            <Font name="Montserrat Medium" size="16.0"/>
+            <Font name="Montserrat Medium" size="16.0" />
         </font>
         <cursor>
-            <Cursor fx:constant="HAND"/>
+            <Cursor fx:constant="HAND" />
         </cursor>
     </JFXButton>
-    <JFXTextField fx:id="tfTenBanDoc" labelFloat="true" layoutX="114.0" layoutY="33.0" prefHeight="30.0"
-                  prefWidth="307.0" promptText="Tên bạn dọc" AnchorPane.topAnchor="33.0"/>
-    <JFXTextField fx:id="tfCmnd" labelFloat="true" layoutX="114.0" layoutY="203.0" prefHeight="30.0" prefWidth="307.0"
-                  promptText="Số CMND" AnchorPane.topAnchor="203.0"/>
-    <JFXTextField fx:id="tfEmail" labelFloat="true" layoutX="114.0" layoutY="272.0" prefHeight="30.0" prefWidth="307.0"
-                  promptText="Email" AnchorPane.topAnchor="272.0"/>
-    <JFXTextField fx:id="tfSodt" labelFloat="true" layoutX="114.0" layoutY="336.0" prefHeight="30.0" prefWidth="307.0"
-                  promptText="Số điện thoại" AnchorPane.topAnchor="336.0"/>
-    <JFXButton fx:id="btnHuy" layoutX="91.0" layoutY="377.0" onAction="#huy" prefHeight="39.0" prefWidth="124.0"
-               text="Huỷ" AnchorPane.bottomAnchor="20.999999999999986" AnchorPane.topAnchor="377.0">
+    <JFXTextField fx:id="tfTenBanDoc" labelFloat="true" layoutX="138.0" layoutY="32.0" prefHeight="30.0" prefWidth="307.0" promptText="Tên bạn dọc" AnchorPane.topAnchor="32.0" />
+    <JFXTextField fx:id="tfCmnd" labelFloat="true" layoutX="138.0" layoutY="202.0" prefHeight="30.0" prefWidth="307.0" promptText="Số CMND" AnchorPane.topAnchor="202.0" />
+    <JFXTextField fx:id="tfEmail" labelFloat="true" layoutX="138.0" layoutY="271.0" prefHeight="30.0" prefWidth="307.0" promptText="Email" AnchorPane.topAnchor="271.0" />
+    <JFXTextField fx:id="tfSodt" labelFloat="true" layoutX="138.0" layoutY="335.0" prefHeight="30.0" prefWidth="307.0" promptText="Số điện thoại" AnchorPane.topAnchor="335.0" />
+    <JFXButton fx:id="btnHuy" layoutX="138.0" layoutY="466.0" onAction="#huy" prefHeight="39.0" prefWidth="124.0" text="Huỷ" AnchorPane.bottomAnchor="58.80000000000001" AnchorPane.topAnchor="464.0">
         <font>
-            <Font name="Montserrat Medium" size="16.0"/>
+            <Font name="Montserrat Medium" size="16.0" />
         </font>
         <cursor>
-            <Cursor fx:constant="HAND"/>
+            <Cursor fx:constant="HAND" />
         </cursor>
     </JFXButton>
-    <JFXDatePicker fx:id="jdpNgaySinh" layoutX="114.0" layoutY="89.0" prefHeight="31.0" prefWidth="307.0"
-                   AnchorPane.topAnchor="89.0">
+    <JFXDatePicker fx:id="jdpNgaySinh" layoutX="138.0" layoutY="88.0" prefHeight="31.0" prefWidth="307.0" AnchorPane.topAnchor="88.0">
         <cursor>
-            <Cursor fx:constant="HAND"/>
+            <Cursor fx:constant="HAND" />
         </cursor>
     </JFXDatePicker>
-    <JFXComboBox fx:id="cbxGioiTinh" editable="true" labelFloat="true" layoutX="114.0" layoutY="148.0" prefHeight="31.0"
-                 prefWidth="307.0" AnchorPane.topAnchor="148.0"/>
-    <JFXDatePicker fx:id="jdpThoiHan" layoutX="114.0" layoutY="406.0" prefHeight="31.0" prefWidth="307.0"
-                   promptText="Thời hạn" AnchorPane.topAnchor="406.0">
+    <JFXComboBox fx:id="cbxGioiTinh" editable="true" labelFloat="true" layoutX="138.0" layoutY="147.0" prefHeight="31.0" prefWidth="307.0" AnchorPane.topAnchor="147.0" />
+    <JFXDatePicker fx:id="jdpThoiHan" layoutX="138.0" layoutY="405.0" prefHeight="31.0" prefWidth="307.0" promptText="Thời hạn" AnchorPane.topAnchor="405.0">
         <cursor>
-            <Cursor fx:constant="HAND"/>
+            <Cursor fx:constant="HAND" />
         </cursor>
     </JFXDatePicker>
-    <Label alignment="CENTER" contentDisplay="TOP" layoutY="90.0" prefHeight="30.0" prefWidth="111.0"
-           text="Chọn ngày sinh">
+    <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="89.0" prefHeight="30.0" prefWidth="111.0" text="Chọn ngày sinh">
         <font>
-            <Font size="13.0"/>
+            <Font name="System Bold" size="15.0" />
         </font>
     </Label>
-    <Label alignment="CENTER" contentDisplay="TOP" layoutY="406.0" prefHeight="30.0" prefWidth="99.0"
-           text="Chọn thời hạn">
+    <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="406.0" prefHeight="30.0" prefWidth="111.0" text="Chọn thời hạn">
         <font>
-            <Font size="13.0"/>
+            <Font name="System Bold" size="15.0" />
         </font>
     </Label>
 </AnchorPane>

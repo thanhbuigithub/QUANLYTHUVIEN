@@ -145,7 +145,7 @@ public class BanDocController {
         Stage stage = new Stage();
         stage.setTitle("Ch\u1EC9nh s\u1EEDa B\u1EA1n \u0110\u1ECDc");
         JFXDecorator decorator = new JFXDecorator(stage, loader.load());
-        Scene scene = new Scene(decorator, 443, 720);
+        Scene scene = new Scene(decorator, 500, 580);
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(Main.stage);

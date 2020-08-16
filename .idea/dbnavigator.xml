@@ -23,11 +23,15 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="6d45768d-73bb-4811-8c95-1244bd6d08e6">
+        <schema name="quanlythuvien" object-types="table, view" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="6d45768d-73bb-4811-8c95-1244bd6d08e6">
-      <console name="Connection" type="STANDARD" schema="" session="Main" />
+      <console name="Connection" type="STANDARD" schema="quanlythuvien" session="Main"><![CDATA[select * from nhan_vien]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
