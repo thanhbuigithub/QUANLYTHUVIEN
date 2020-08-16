@@ -203,7 +203,7 @@ public class MainController implements Initializable {
 
         taoBanDoc.setOnAction(e -> {
             try {
-                createStage("/view/banDoc/themBanDoc.fxml", "Th\u00EAm b\u1EA1n \u0111\u1ECDc", 443, 762);
+                createStage("/view/banDoc/themBanDoc.fxml", "Th\u00EAm b\u1EA1n \u0111\u1ECDc", 443, 630);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -216,7 +216,7 @@ public class MainController implements Initializable {
 
         taoNhanVien.setOnAction(e -> {
             try {
-                createStage("/view/nhanVien/themNhanVien.fxml", "Th\u00EAm nh\u00E2n vi\u00EAn", 443, 630);
+                createStage("/view/nhanVien/themNhanVien.fxml", "Th\u00EAm nh\u00E2n vi\u00EAn", 443, 810);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

@@ -41,7 +41,7 @@
             <Cursor fx:constant="HAND"/>
         </cursor>
     </JFXDatePicker>
-    <JFXComboBox fx:id="cbxGioiTinh" editable="true" labelFloat="true" layoutX="138.0" layoutY="147.0" prefHeight="31.0"
+    <JFXComboBox fx:id="cbxGioiTinh" labelFloat="true" layoutX="138.0" layoutY="147.0" prefHeight="31.0"
                  prefWidth="307.0" AnchorPane.topAnchor="147.0"/>
     <Label alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="89.0" prefHeight="30.0"
            prefWidth="111.0" text="Chọn ngày sinh">
@@ -55,7 +55,7 @@
             <Font name="System Bold" size="15.0"/>
         </font>
     </Label>
-    <JFXComboBox fx:id="cbxChucVu" editable="true" labelFloat="true" layoutX="138.0" layoutY="408.0" prefHeight="31.0"
+    <JFXComboBox fx:id="cbxChucVu" labelFloat="true" layoutX="138.0" layoutY="408.0" prefHeight="31.0"
                  prefWidth="307.0"/>
     <Label alignment="BOTTOM_CENTER" layoutX="14.0" layoutY="409.0" prefHeight="37.0" prefWidth="111.0" text="Chức vụ">
         <font>

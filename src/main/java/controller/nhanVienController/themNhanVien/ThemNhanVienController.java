@@ -1,20 +1,17 @@
 package controller.nhanVienController.themNhanVien;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import modules.dao.BanDocDAO;
 import modules.dao.NhanVienDAO;
-import modules.entities.BanDoc;
 import modules.entities.NhanVien;
 
 import java.net.URL;
@@ -47,6 +44,15 @@ public class ThemNhanVienController implements Initializable {
     private JFXTextField tfSodt;
 
     @FXML
+    private JFXTextField tfUsername;
+
+    @FXML
+    private JFXPasswordField tfPassWord;
+
+    @FXML
+    private JFXPasswordField tfConfirmPassword;
+
+    @FXML
     private JFXComboBox<String> cbxChucVu;
 
     @Override
@@ -57,12 +63,21 @@ public class ThemNhanVienController implements Initializable {
         notNullValidator(tfCmnd);
         notNullValidator(tfEmail);
         notNullValidator(tfSodt);
+        notNullValidator(tfUsername);
+        notNullValidatorPassWord(tfPassWord);
+        notNullValidatorPassWord(tfConfirmPassword);
 
         numberOnlyTextField(tfCmnd);
     }
 
     @FXML
     void themNhanVien(ActionEvent event) {
+        if (!tfPassWord.getText().equals(tfConfirmPassword.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("");
+            alert.setContentText("M\u1EADt kh\u1EA9u kh\u00F4ng tr\u00F9ng kh\u1EDBp !");
+            alert.showAndWait();
+        }
         if (isValidateAll()) {
             NhanVienDAO.getInstance().insert(getNhanVien());
             NhanVienDAO.getInstance().reload();
@@ -95,6 +110,17 @@ public class ThemNhanVienController implements Initializable {
         });
     }
 
+    private void notNullValidatorPassWord(JFXPasswordField tf) {
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        tf.getValidators().add(validator);
+        validator.setMessage("Kh\u00F4ng \u0111\u01B0\u1EE3c b\u1ECF tr\u1ED1ng");
+        tf.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                validator.validate();
+            }
+        });
+    }
+
     private void numberOnlyTextField(JFXTextField tf) {
         tf.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -109,7 +135,9 @@ public class ThemNhanVienController implements Initializable {
         return tfTenNhanVien.validate() &&
                 tfCmnd.validate() &&
                 tfEmail.validate() &&
-                tfSodt.validate() && jdpNgaySinh.validate() && cbxGioiTinh.validate() && cbxChucVu.validate();
+                tfSodt.validate() && jdpNgaySinh.validate()
+                && cbxGioiTinh.validate() && cbxChucVu.validate() && tfUsername.validate()
+                && tfPassWord.validate() && tfConfirmPassword.validate() && tfPassWord.getText().equals(tfConfirmPassword.getText());
     }
 
     private NhanVien getNhanVien() {
@@ -124,6 +152,8 @@ public class ThemNhanVienController implements Initializable {
         nhanVien.setCmnd(tfCmnd.getText());
         nhanVien.setEmail(tfEmail.getText());
         nhanVien.setSdt(tfSodt.getText());
+        nhanVien.setUsername(tfUsername.getText());
+        nhanVien.setPassword(tfPassWord.getText());
         if (cbxChucVu.getValue().toLowerCase().equals("nh\u00E2n vi\u00EAn")) {
             nhanVien.setChucDanh(0);
         } else if (cbxChucVu.getValue().toLowerCase().equals("admin")) {
