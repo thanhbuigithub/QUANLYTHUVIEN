@@ -118,12 +118,12 @@ public class QuanLyNhanVienController {
         colChucDanh.setCellValueFactory((param) -> {
             if (colChucDanh.validateValue(param)) {
                 NhanVien NhanVien = param.getValue().getValue();
-                if (NhanVien.getChucDanh() == 0) {
-                    return new SimpleStringProperty("Nh\u00E2n vi\u00EAn");
-                } else if (NhanVien.getChucDanh() == 1) {
-                    return new SimpleStringProperty("Admin");
+                if (NhanVien.getChucDanh() == 1) {
+                    return new SimpleStringProperty("Th\u1EE7 th\u01B0");
+                } else if (NhanVien.getChucDanh() == 2) {
+                    return new SimpleStringProperty("Ban k\u1EF9 thu\u1EADt");
                 }
-                return new SimpleStringProperty("Th\u1EE7 th\u01B0");
+                return new SimpleStringProperty("Admin");
             } else return colChucDanh.getComputedValue(param);
         });
         CellFactory.getInstance().StringCenterValueFactory(colChucDanh);

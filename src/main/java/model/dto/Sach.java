@@ -110,7 +110,7 @@ public class Sach extends RecursiveTreeObject<Sach> {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "sach_nha_xuat_ban", joinColumns = { @JoinColumn(name = "id_sach") }, inverseJoinColumns = { @JoinColumn(name = "id_nha_xuat_ban") })
+    @JoinTable(name = "sach_nha_xuat_ban", joinColumns = { @JoinColumn(name = "sach_id") }, inverseJoinColumns = { @JoinColumn(name = "nha_xuat_ban_id") })
     public Set<NhaXuatBan> getNhaXuatBan() {
         return nhaXuatBan;
     }
@@ -120,7 +120,7 @@ public class Sach extends RecursiveTreeObject<Sach> {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "sach_ngon_ngu", joinColumns = { @JoinColumn(name = "id_sach") }, inverseJoinColumns = { @JoinColumn(name = "id_ngon_ngu") })
+    @JoinTable(name = "sach_ngon_ngu", joinColumns = { @JoinColumn(name = "sach_id") }, inverseJoinColumns = { @JoinColumn(name = "ngon_ngu_id") })
     public Set<NgonNgu> getNgonNgu() {
         return ngonNgu;
     }
@@ -130,7 +130,7 @@ public class Sach extends RecursiveTreeObject<Sach> {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "sach_tac_gia", joinColumns = { @JoinColumn(name = "id_sach") }, inverseJoinColumns = { @JoinColumn(name = "id_tac_gia") })
+    @JoinTable(name = "sach_tac_gia", joinColumns = { @JoinColumn(name = "sach_id") }, inverseJoinColumns = { @JoinColumn(name = "tac_gia_id") })
     public Set<TacGia> getTacGia() {
         return tacGia;
     }
@@ -140,7 +140,7 @@ public class Sach extends RecursiveTreeObject<Sach> {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "sach_the_loai", joinColumns = { @JoinColumn(name = "id_sach") }, inverseJoinColumns = { @JoinColumn(name = "id_the_loai") })
+    @JoinTable(name = "sach_the_loai", joinColumns = { @JoinColumn(name = "sach_id") }, inverseJoinColumns = { @JoinColumn(name = "the_loai_id") })
     public Set<TheLoai> getTheLoai() {
         return theLoai;
     }

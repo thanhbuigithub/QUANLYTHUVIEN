@@ -6,40 +6,40 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class SachTheLoaiPK implements Serializable {
-    private int idSach;
-    private int idTheLoai;
-
-    @Column(name = "id_sach")
-    @Id
-    public int getIdSach() {
-        return idSach;
-    }
-
-    public void setIdSach(int idSach) {
-        this.idSach = idSach;
-    }
-
-    @Column(name = "id_the_loai")
-    @Id
-    public int getIdTheLoai() {
-        return idTheLoai;
-    }
-
-    public void setIdTheLoai(int idTheLoai) {
-        this.idTheLoai = idTheLoai;
-    }
+    private int sachId;
+    private int theLoaiId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SachTheLoaiPK that = (SachTheLoaiPK) o;
-        return idSach == that.idSach &&
-                idTheLoai == that.idTheLoai;
+        return sachId == that.sachId &&
+                theLoaiId == that.theLoaiId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idSach, idTheLoai);
+        return Objects.hash(sachId, theLoaiId);
+    }
+
+    @Column(name = "sach_id")
+    @Id
+    public int getSachId() {
+        return sachId;
+    }
+
+    public void setSachId(int sachId) {
+        this.sachId = sachId;
+    }
+
+    @Column(name = "the_loai_id")
+    @Id
+    public int getTheLoaiId() {
+        return theLoaiId;
+    }
+
+    public void setTheLoaiId(int theLoaiId) {
+        this.theLoaiId = theLoaiId;
     }
 }

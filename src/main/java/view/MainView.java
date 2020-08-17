@@ -51,6 +51,7 @@ public class MainView extends MainController implements Initializable {
         quanLySachView = new QuanLySachView(rootPane, mainPane);
         quanLyBanDocView = new QuanLyBanDocView(rootPane, mainPane);
         quanLyNhanVienView = new QuanLyNhanVienView(rootPane, mainPane);
+        lichSuDangNhapView = new LichSuDangNhapView(rootPane,mainPane);
     }
 
     private Clock createClock(){

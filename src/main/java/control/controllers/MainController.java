@@ -86,6 +86,7 @@ public class MainController {
     protected QuanLySachView quanLySachView;
     protected QuanLyBanDocView quanLyBanDocView;
     protected QuanLyNhanVienView quanLyNhanVienView;
+    protected LichSuDangNhapView lichSuDangNhapView;
 
 
     protected void btnAccountEventHanler(){
@@ -123,6 +124,8 @@ public class MainController {
         } else if (target == btnThongKe) {
             tablePane.setStyle("-fx-border-color: " + MAINCOLOR.ThongKe);
             topPane.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
+        } else if (target == btnLichSuDangNhap) {
+            switchFunction(MAINCOLOR.LichSuDangNhap, lichSuDangNhapView.getTable(tfSearch), lichSuDangNhapView.getListBtn());
         }
 
         if (selectedBtn.get() != target) {
@@ -169,6 +172,8 @@ public class MainController {
             btn.setStyle("-fx-background-color: " + MAINCOLOR.BanDoc);
         } else if (btn == btnThongKe) {
             btn.setStyle("-fx-background-color: " + MAINCOLOR.ThongKe);
+        } else if (btn == btnLichSuDangNhap) {
+            btn.setStyle("-fx-background-color: " + MAINCOLOR.LichSuDangNhap);
         }
     }
 
