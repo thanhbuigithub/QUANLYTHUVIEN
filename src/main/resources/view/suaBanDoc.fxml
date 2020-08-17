@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="459.0" prefWidth="473.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SuaBanDocView">
+    <stylesheets>
+        <URL value="@style/style.css" />
+    </stylesheets>
+    <JFXButton fx:id="btnCapNhat" layoutX="280.0" layoutY="389.0" onAction="#capNhat" prefHeight="39.0" prefWidth="124.0" text="Cập nhật" AnchorPane.bottomAnchor="30.0">
+        <font>
+            <Font name="Montserrat Medium" size="16.0" />
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+    </JFXButton>
+    <JFXButton fx:id="btnHuy" layoutX="137.0" layoutY="389.0" onAction="#huy" prefHeight="39.0" prefWidth="124.0" text="Huỷ" AnchorPane.bottomAnchor="30.0">
+        <font>
+            <Font name="Montserrat Medium" size="16.0" />
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+    </JFXButton>
+   <JFXTextField fx:id="tfNgaySinh" labelFloat="true" layoutX="75.0" layoutY="113.0" prefHeight="30.0" prefWidth="330.0" promptText="Ngày sinh" AnchorPane.topAnchor="90.0" />
+   <JFXTextField fx:id="tfTenBanDoc" labelFloat="true" layoutX="74.0" layoutY="33.0" prefHeight="30.0" prefWidth="330.0" promptText="Tên bạn đọc" AnchorPane.topAnchor="30.0" />
+   <JFXTextField fx:id="tfCmnd" labelFloat="true" layoutX="75.0" layoutY="250.0" prefHeight="30.0" prefWidth="330.0" promptText="Số CMND" AnchorPane.topAnchor="210.0" />
+   <JFXTextField fx:id="tfEmail" labelFloat="true" layoutX="75.0" layoutY="314.0" prefHeight="30.0" prefWidth="330.0" promptText="Email" AnchorPane.topAnchor="270.0" />
+   <JFXTextField fx:id="tfSodt" labelFloat="true" layoutX="74.0" layoutY="382.0" prefHeight="30.0" prefWidth="330.0" promptText="Số điện thoại" AnchorPane.topAnchor="330.0" />
+   <JFXComboBox fx:id="cbxGioiTinh" editable="true" labelFloat="true" layoutX="75.0" layoutY="185.0" prefHeight="31.0" prefWidth="330.0" promptText="Giới tính" AnchorPane.topAnchor="150.0" />
+</AnchorPane>

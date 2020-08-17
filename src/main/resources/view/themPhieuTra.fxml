@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="308.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ThemPhieuTraView">
+    <stylesheets>
+        <URL value="@style/style.css" />
+    </stylesheets>
+    <children>
+        <Label contentDisplay="TOP" layoutX="44.0" layoutY="41.0" text="Phiếu mượn" textFill="#656565">
+            <font>
+                <Font name="Montserrat Medium" size="18.0" />
+            </font>
+        </Label>
+        <JFXComboBox fx:id="cbxIdPhieuMuon" editable="true" layoutX="188.0" layoutY="27.0" prefHeight="50.0" prefWidth="321.0" />
+
+        <Label contentDisplay="TOP" layoutX="46.0" layoutY="105.0" prefHeight="27.0" prefWidth="119.0" text="Tình trạng" textFill="#656565">
+            <font>
+                <Font name="Montserrat Medium" size="18.0" />
+            </font>
+        </Label>
+      <JFXTextField fx:id="tfTinhTrang" layoutX="192.0" layoutY="103.0" prefHeight="31.0" prefWidth="321.0" />
+        <Label contentDisplay="TOP" layoutX="46.0" layoutY="171.0" prefHeight="27.0" prefWidth="119.0" text="Bồi thường" textFill="#656565">
+            <font>
+                <Font name="Montserrat Medium" size="18.0" />
+            </font>
+        </Label>
+      <JFXTextField fx:id="tfBoiThuong" layoutX="192.0" layoutY="169.0" prefHeight="31.0" prefWidth="321.0" />
+        <JFXButton fx:id="btnTaoPhieuTra" layoutX="191.0" layoutY="248.0" prefHeight="39.0" prefWidth="177.0" text="Tạo Phiếu Trả">
+            <font>
+                <Font name="Montserrat Medium" size="18.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+
+    </children>
+</AnchorPane>

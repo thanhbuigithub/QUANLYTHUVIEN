@@ -9,14 +9,23 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="current_session_context_class">thread</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">12345</property>
-        <mapping class="modules.entities.BanDoc"/>
-        <mapping class="modules.entities.NhanVien"/>
-        <mapping class="modules.entities.PhieuMuon"/>
-        <mapping class="modules.entities.PhieuTra"/>
-        <mapping class="modules.entities.Sach"/>
-        <mapping class="modules.entities.ViTri"/>
-        <mapping class="modules.entities.LichSuDangNhap"/>
+        <property name="connection.password">admin</property>
+        <mapping class="model.dto.BanDoc"/>
+        <mapping class="model.dto.NhanVien"/>
+        <mapping class="model.dto.PhieuMuon"/>
+        <mapping class="model.dto.PhieuTra"/>
+        <mapping class="model.dto.Sach"/>
+        <mapping class="model.dto.ViTri"/>
+        <mapping class="model.dto.LichSuDangNhap"/>
+        <mapping class="model.dto.NgonNgu"/>
+        <mapping class="model.dto.NhaXuatBan"/>
+        <mapping class="model.dto.TacGia"/>
+        <mapping class="model.dto.ThamSo"/>
+        <mapping class="model.dto.TheLoai"/>
+        <mapping class="model.dto.SachNgonNgu"/>
+        <mapping class="model.dto.SachNhaXuatBan"/>
+        <mapping class="model.dto.SachTacGia"/>
+        <mapping class="model.dto.SachTheLoai"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

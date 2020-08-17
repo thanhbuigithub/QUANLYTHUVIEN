@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="651.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="control.controllers.SuaNhanVienController">
+    <stylesheets>
+        <URL value="@style/style.css" />
+    </stylesheets>
+    <JFXButton fx:id="btnCapNhat" layoutX="321.0" layoutY="592.0" onAction="#capNhat" prefHeight="37.0"
+               prefWidth="124.0" text="Cập nhật" AnchorPane.bottomAnchor="22.0">
+        <font>
+            <Font name="Montserrat Medium" size="16.0"/>
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+    </JFXButton>
+    <JFXTextField fx:id="tfTenNhanVien" labelFloat="true" layoutX="138.0" layoutY="32.0" prefHeight="30.0"
+                  prefWidth="307.0" promptText="Tên nhân viên" AnchorPane.topAnchor="32.0"/>
+    <JFXTextField fx:id="tfCmnd" labelFloat="true" layoutX="138.0" layoutY="202.0" prefHeight="30.0" prefWidth="307.0"
+                  promptText="Số CMND" AnchorPane.topAnchor="202.0"/>
+    <JFXTextField fx:id="tfEmail" labelFloat="true" layoutX="138.0" layoutY="271.0" prefHeight="30.0" prefWidth="307.0"
+                  promptText="Email" AnchorPane.topAnchor="271.0"/>
+    <JFXTextField fx:id="tfSodt" labelFloat="true" layoutX="138.0" layoutY="335.0" prefHeight="30.0" prefWidth="307.0"
+                  promptText="Số điện thoại" AnchorPane.topAnchor="335.0"/>
+    <JFXButton fx:id="btnHuy" layoutX="138.0" layoutY="592.0" onAction="#huy" prefHeight="37.0" prefWidth="124.0"
+               text="Huỷ" AnchorPane.bottomAnchor="22.0">
+        <font>
+            <Font name="Montserrat Medium" size="16.0"/>
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+    </JFXButton>
+    <JFXDatePicker fx:id="jdpNgaySinh" layoutX="138.0" layoutY="88.0" prefHeight="31.0" prefWidth="307.0"
+                   AnchorPane.topAnchor="88.0">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+    </JFXDatePicker>
+    <JFXComboBox fx:id="cbxGioiTinh" labelFloat="true" layoutX="138.0" layoutY="147.0" prefHeight="31.0"
+                 prefWidth="307.0" AnchorPane.topAnchor="147.0"/>
+    <Label alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="89.0" prefHeight="30.0"
+           prefWidth="111.0" text="Chọn ngày sinh">
+        <font>
+            <Font name="System Bold" size="15.0"/>
+        </font>
+    </Label>
+    <Label alignment="BOTTOM_CENTER" layoutX="14.0" layoutY="155.0" prefHeight="30.0" prefWidth="111.0"
+           text="Giới tính">
+        <font>
+            <Font name="System Bold" size="15.0"/>
+        </font>
+    </Label>
+    <JFXComboBox fx:id="cbxChucVu" labelFloat="true" layoutX="138.0" layoutY="531.0" prefHeight="31.0"
+                 prefWidth="307.0"/>
+    <Label alignment="BOTTOM_CENTER" layoutX="14.0" layoutY="532.0" prefHeight="37.0" prefWidth="111.0" text="Chức vụ">
+        <font>
+            <Font name="System Bold" size="15.0"/>
+        </font>
+    </Label>
+    <JFXTextField fx:id="tfUsername" labelFloat="true" layoutX="138.0" layoutY="406.0" prefHeight="30.0"
+                  prefWidth="307.0" promptText="UserName"/>
+    <JFXPasswordField fx:id="tfPassword" layoutX="138.0" layoutY="474.0" prefHeight="31.0" prefWidth="307.0"
+                      promptText="Mật khẩu"/>
+</AnchorPane>

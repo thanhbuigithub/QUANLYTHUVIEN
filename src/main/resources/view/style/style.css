@@ -1,0 +1,53 @@
+.tree-table-view .tree-table-cell {
+    -fx-border-width: 0 0 0 0;
+    -fx-padding: 5 0 5 0;
+    -fx-alignment: center;
+}
+
+.menu-item {
+    -fx-padding: 10;
+}
+
+.text-center{
+    -fx-text-alignment: center;
+}
+
+.dialog-button{
+    -fx-border-color: #1976D2;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.dialog-button:hover{
+    -fx-background-color: #1976D2;
+    -fx-border-color: derive(-fx-color-1, -20%);
+    -fx-text-fill: white;
+}
+
+.add-button{
+    -fx-pref-height: 45;
+    -fx-border-color: white;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-text-fill: white;
+    -fx-font-family: "Montserrat SemiBold";
+}
+
+.add-button:hover{
+    -fx-background-color: white;
+    -fx-border-color: derive(#1976D2, -20%);
+    -fx-text-fill: black;
+}
+
+.jfx-decorator {
+    -fx-decorator-color: blue;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .resize-border {
+    -fx-border-color: -fx-decorator-color;
+    -fx-border-width: 0 4 4 4;
+}
