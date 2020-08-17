@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `lich_su_dang_nhap`
+-- Table structure for table `sach_the_loai`
 --
 
-DROP TABLE IF EXISTS `lich_su_dang_nhap`;
+DROP TABLE IF EXISTS `sach_the_loai`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `lich_su_dang_nhap` (
-  `id` int NOT NULL,
-  `nhanVien_id` int DEFAULT NULL,
-  `thoi_gian_dang_nhap` datetime DEFAULT NULL,
-  `thoi_gian_dang_xuat` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_id_nhan_vien_lich_su_dang_nhap_idx` (`nhanVien_id`),
-  CONSTRAINT `fk_id_nhan_vien_lich_su_dang_nhap` FOREIGN KEY (`nhanVien_id`) REFERENCES `nhan_vien` (`id`)
+CREATE TABLE `sach_the_loai` (
+  `sach_id` int NOT NULL,
+  `the_loai_id` int NOT NULL,
+  PRIMARY KEY (`sach_id`,`the_loai_id`),
+  KEY `fk_id_the_loai_sach_the_loai_idx` (`the_loai_id`),
+  CONSTRAINT `fk_id_sach_sach_the_loai` FOREIGN KEY (`sach_id`) REFERENCES `sach` (`id`),
+  CONSTRAINT `fk_id_the_loai_sach_the_loai` FOREIGN KEY (`the_loai_id`) REFERENCES `the_loai` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lich_su_dang_nhap`
+-- Dumping data for table `sach_the_loai`
 --
 
-LOCK TABLES `lich_su_dang_nhap` WRITE;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` ENABLE KEYS */;
+LOCK TABLES `sach_the_loai` WRITE;
+/*!40000 ALTER TABLE `sach_the_loai` DISABLE KEYS */;
+INSERT INTO `sach_the_loai` VALUES (2,1),(3,2),(4,3),(5,4),(6,5);
+/*!40000 ALTER TABLE `sach_the_loai` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

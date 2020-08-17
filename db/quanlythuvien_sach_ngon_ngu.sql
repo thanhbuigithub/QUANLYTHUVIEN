@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `lich_su_dang_nhap`
+-- Table structure for table `sach_ngon_ngu`
 --
 
-DROP TABLE IF EXISTS `lich_su_dang_nhap`;
+DROP TABLE IF EXISTS `sach_ngon_ngu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `lich_su_dang_nhap` (
-  `id` int NOT NULL,
-  `nhanVien_id` int DEFAULT NULL,
-  `thoi_gian_dang_nhap` datetime DEFAULT NULL,
-  `thoi_gian_dang_xuat` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_id_nhan_vien_lich_su_dang_nhap_idx` (`nhanVien_id`),
-  CONSTRAINT `fk_id_nhan_vien_lich_su_dang_nhap` FOREIGN KEY (`nhanVien_id`) REFERENCES `nhan_vien` (`id`)
+CREATE TABLE `sach_ngon_ngu` (
+  `sach_id` int NOT NULL,
+  `ngon_ngu_id` int NOT NULL,
+  PRIMARY KEY (`sach_id`,`ngon_ngu_id`),
+  KEY `fk_id_ngon_ngu_sach_ngon_ngu_idx` (`ngon_ngu_id`),
+  CONSTRAINT `fk_id_ngon_ngu_sach_ngon_ngu` FOREIGN KEY (`ngon_ngu_id`) REFERENCES `ngon_ngu` (`id`),
+  CONSTRAINT `fk_id_sach_sach_ngon_ngu` FOREIGN KEY (`sach_id`) REFERENCES `sach` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lich_su_dang_nhap`
+-- Dumping data for table `sach_ngon_ngu`
 --
 
-LOCK TABLES `lich_su_dang_nhap` WRITE;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` ENABLE KEYS */;
+LOCK TABLES `sach_ngon_ngu` WRITE;
+/*!40000 ALTER TABLE `sach_ngon_ngu` DISABLE KEYS */;
+INSERT INTO `sach_ngon_ngu` VALUES (2,1),(3,1),(4,1),(5,1),(6,1);
+/*!40000 ALTER TABLE `sach_ngon_ngu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -43,7 +43,7 @@ CREATE TABLE `nhan_vien` (
 
 LOCK TABLES `nhan_vien` WRITE;
 /*!40000 ALTER TABLE `nhan_vien` DISABLE KEYS */;
-INSERT INTO `nhan_vien` VALUES (1,'admin','1988-09-09',0,'213648245','admin@gmail.com','0126830453','admin','admin',1),(2,'Nguyễn Văn An','1985-11-07',0,'213475746','vanan@gmail.com','0127394027','vanan','vanan',0),(3,'Đào Thị Tuyết','1980-01-23',1,'427428424','thituyet@gmail.com','0163926493','thituyet','thituyet',0),(4,'Bùi Thị Hảo','1995-05-07',1,'629362824','thihao@gmail.com','0162845284','thihao','thihao',0),(5,'Đoàn Minh Quân','1975-08-09',0,'528492649','minhquan@gmail.com','0126267873','minhquan','minhquan',0);
+INSERT INTO `nhan_vien` VALUES (1,'admin','1988-09-09',0,'213648245','admin@gmail.com','0126830453','admin','admin',3),(2,'Nguyễn Văn An','1985-11-07',0,'213475746','vanan@gmail.com','0127394027','vanan','vanan',1),(3,'Đào Thị Tuyết','1980-01-23',1,'427428424','thituyet@gmail.com','0163926493','thituyet','thituyet',1),(4,'Bùi Thị Hảo','1995-05-07',1,'629362824','thihao@gmail.com','0162845284','thihao','thihao',1),(5,'Đoàn Minh Quân','1975-08-09',0,'528492649','minhquan@gmail.com','0126267873','minhquan','minhquan',1);
 /*!40000 ALTER TABLE `nhan_vien` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-08 21:52:53
+-- Dump completed on 2020-08-18  0:58:23

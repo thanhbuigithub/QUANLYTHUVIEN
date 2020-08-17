@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `lich_su_dang_nhap`
+-- Table structure for table `tac_gia`
 --
 
-DROP TABLE IF EXISTS `lich_su_dang_nhap`;
+DROP TABLE IF EXISTS `tac_gia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `lich_su_dang_nhap` (
-  `id` int NOT NULL,
-  `nhanVien_id` int DEFAULT NULL,
-  `thoi_gian_dang_nhap` datetime DEFAULT NULL,
-  `thoi_gian_dang_xuat` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_id_nhan_vien_lich_su_dang_nhap_idx` (`nhanVien_id`),
-  CONSTRAINT `fk_id_nhan_vien_lich_su_dang_nhap` FOREIGN KEY (`nhanVien_id`) REFERENCES `nhan_vien` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `tac_gia` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ten_tac_gia` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lich_su_dang_nhap`
+-- Dumping data for table `tac_gia`
 --
 
-LOCK TABLES `lich_su_dang_nhap` WRITE;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` ENABLE KEYS */;
+LOCK TABLES `tac_gia` WRITE;
+/*!40000 ALTER TABLE `tac_gia` DISABLE KEYS */;
+INSERT INTO `tac_gia` VALUES (1,'Nguyễn Nhật Ánh'),(2,'Nguyễn Phong Việt'),(3,'Anh Khang'),(4,'Nguyễn Ngọc Thạch'),(5,'Nguyễn Ngọc Sơn');
+/*!40000 ALTER TABLE `tac_gia` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-18  0:58:23
+-- Dump completed on 2020-08-18  0:58:22

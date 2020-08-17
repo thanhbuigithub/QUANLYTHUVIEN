@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `lich_su_dang_nhap`
+-- Table structure for table `the_loai`
 --
 
-DROP TABLE IF EXISTS `lich_su_dang_nhap`;
+DROP TABLE IF EXISTS `the_loai`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `lich_su_dang_nhap` (
-  `id` int NOT NULL,
-  `nhanVien_id` int DEFAULT NULL,
-  `thoi_gian_dang_nhap` datetime DEFAULT NULL,
-  `thoi_gian_dang_xuat` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_id_nhan_vien_lich_su_dang_nhap_idx` (`nhanVien_id`),
-  CONSTRAINT `fk_id_nhan_vien_lich_su_dang_nhap` FOREIGN KEY (`nhanVien_id`) REFERENCES `nhan_vien` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `the_loai` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ten_the_loai` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lich_su_dang_nhap`
+-- Dumping data for table `the_loai`
 --
 
-LOCK TABLES `lich_su_dang_nhap` WRITE;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lich_su_dang_nhap` ENABLE KEYS */;
+LOCK TABLES `the_loai` WRITE;
+/*!40000 ALTER TABLE `the_loai` DISABLE KEYS */;
+INSERT INTO `the_loai` VALUES (1,'Văn học nghệ thuật'),(2,'Sách thiếu nhi'),(3,'Khoa học công nghệ – Kinh tế'),(4,'Văn hóa xã hội – Lịch sử'),(5,'Chính trị – pháp luật');
+/*!40000 ALTER TABLE `the_loai` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

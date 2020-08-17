@@ -24,13 +24,13 @@ DROP TABLE IF EXISTS `phieu_tra`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `phieu_tra` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_phieu_muon` int DEFAULT NULL,
+  `phieuMuon_id` int DEFAULT NULL,
   `ngay_tra` date DEFAULT NULL,
   `tinh_trang` varchar(45) DEFAULT NULL,
   `boi_thuong` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_id_phieu_muon_phieu_tra_idx` (`id_phieu_muon`),
-  CONSTRAINT `fk_id_phieu_muon_phieu_tra` FOREIGN KEY (`id_phieu_muon`) REFERENCES `phieu_muon` (`id`)
+  KEY `fk_id_phieu_muon_phieu_tra_idx` (`phieuMuon_id`),
+  CONSTRAINT `fk_id_phieu_muon_phieu_tra` FOREIGN KEY (`phieuMuon_id`) REFERENCES `phieu_muon` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-08 21:52:54
+-- Dump completed on 2020-08-18  0:58:21
