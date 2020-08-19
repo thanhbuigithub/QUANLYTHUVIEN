@@ -246,17 +246,17 @@ public class QuanLySachController {
             sach.setTenSach(row.getCell(0).getStringCellValue());
             sach.setNamXuatBan((int) row.getCell(1).getNumericCellValue());
             Set<NhaXuatBan> nhaXuatBanSet = new HashSet<>();
-            nhaXuatBanSet.add(NhaXuatBanDAO.getInstance().getByID((int) row.getCell(2).getNumericCellValue()));
+            nhaXuatBanSet.add(NhaXuatBanDAO.getInstance().getByID(Integer.parseInt(row.getCell(2).getStringCellValue())));
             sach.setNhaXuatBan(nhaXuatBanSet);
             Set<NgonNgu> ngonNguSet = new HashSet<>();
-            ngonNguSet.add(NgonNguDAO.getInstance().getByID((int) row.getCell(3).getNumericCellValue()));
+            ngonNguSet.add(NgonNguDAO.getInstance().getByID(Integer.parseInt(row.getCell(3).getStringCellValue())));
             sach.setNgonNgu(ngonNguSet);
             Set<TacGia> tacGiaSet = new HashSet<>();
-            tacGiaSet.add(TacGiaDAO.getInstance().getByID((int) row.getCell(4).getNumericCellValue()));
+            tacGiaSet.add(TacGiaDAO.getInstance().getByID(Integer.parseInt(row.getCell(4).getStringCellValue())));
             sach.setTacGia(tacGiaSet);
 
             Set<TheLoai> theLoaiSet = new HashSet<>();
-            theLoaiSet.add(TheLoaiDAO.getInstance().getByID((int) row.getCell(5).getNumericCellValue()));
+            theLoaiSet.add(TheLoaiDAO.getInstance().getByID(Integer.parseInt(row.getCell(5).getStringCellValue())));
             sach.setTheLoai(theLoaiSet);
 
             ViTri viTri = ViTriDAO.getInstance().getByID((int) row.getCell(6).getNumericCellValue());
@@ -265,6 +265,7 @@ public class QuanLySachController {
             sach.setSoLuong((int) row.getCell(8).getNumericCellValue());
             sach.setSoTrang((int) row.getCell(9).getNumericCellValue());
 
+            System.out.println();
             SachDAO.getInstance().insert(sach);
         }
 

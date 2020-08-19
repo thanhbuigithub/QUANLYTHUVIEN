@@ -7,7 +7,7 @@ import org.hibernate.Session;
 
 public class TheLoaiDAO extends DAO<TheLoai> {
     private TheLoaiDAO() {
-        super(BanDoc.class);
+        super(TheLoai.class);
     }
 
     private static final TheLoaiDAO instance = new TheLoaiDAO();

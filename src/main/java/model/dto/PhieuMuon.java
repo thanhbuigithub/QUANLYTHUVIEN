@@ -114,4 +114,11 @@ public class PhieuMuon extends RecursiveTreeObject<PhieuMuon> {
     public void setNhanVien(NhanVien nhanVien) {
         this.nhanVien = nhanVien;
     }
+
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ", sach=" + sach +
+                ", banDoc=" + banDoc;
+    }
 }

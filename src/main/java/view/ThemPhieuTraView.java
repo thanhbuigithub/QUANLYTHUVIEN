@@ -28,8 +28,6 @@ public class ThemPhieuTraView extends ThemPhieuTraController implements Initiali
         });
         new AutoCompleteComboBoxListener<>(cbxIdPhieuMuon);
 
-        btnTaoPhieuTra.setOnAction(e -> {
-
-        });
+        btnSetOnAction();
     }
 }
